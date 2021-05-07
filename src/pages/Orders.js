@@ -1,6 +1,7 @@
 import React from "react";
 import Amplify, { API, graphqlOperation } from "aws-amplify";
 import { listJJPOrders, listJJPProducts } from "../graphql/queries";
+import { withAuthenticator } from "@aws-amplify/ui-react";
 
 function Orders() {
   const [orders, setorders] = React.useState([]);
@@ -29,4 +30,4 @@ function Orders() {
   );
 }
 
-export default Orders;
+export default withAuthenticator(Orders);

@@ -1,6 +1,7 @@
 import React from "react";
 import { API, graphqlOperation } from "aws-amplify";
 import { createJJPProduct } from "../graphql/mutations";
+import { withAuthenticator } from "@aws-amplify/ui-react";
 
 function CreatProduct() {
   const [input, setinput] = React.useState({
@@ -45,4 +46,4 @@ function CreatProduct() {
   );
 }
 
-export default CreatProduct;
+export default withAuthenticator(CreatProduct);
