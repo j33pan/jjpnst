@@ -8,6 +8,7 @@ import Signin from "./pages/Signin";
 import Products from "./pages/Products";
 import Orders from "./pages/Orders";
 import CreatProduct from "./pages/CreatProduct";
+import ShoppingCart from "./pages/ShoppingCart";
 Amplify.configure(awsconfig);
 
 function App() {
@@ -24,20 +25,23 @@ function App() {
   };
 
   return (
-    <div>
+    <div style={{ padding: 20 }}>
       <Router>
-        <Link to="/">Home </Link>
-        <Link to="/products">Products </Link>
-        <Link to="/orders">Orders </Link>
-        <Link to="/createprod">Create Product </Link>
-        <Link to="/signin">Sign in</Link>
-        <hr />
+        <div style={{ marginBottom: 10 }}>
+          <Link to="/">Home </Link>
+          <Link to="/createprod">Create Product </Link>
+          <Link to="/products">Products </Link>
+          <Link to="/orders">Orders </Link>
+          <Link to="/cart">Cart</Link>
+          <Link to="/signin">Sign in</Link>
+        </div>
         <Switch>
           <Route component={Home} path="/" exact />
           <Route component={Signin} path="/signin" exact />
           <Route component={Products} path="/products" exact />
           <Route component={Orders} path="/orders" exact />
           <Route component={CreatProduct} path="/createprod" exact />
+          <Route component={ShoppingCart} path="/cart" exact />
         </Switch>
       </Router>
     </div>
