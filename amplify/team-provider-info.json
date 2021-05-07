@@ -14,6 +14,38 @@
     "categories": {
       "auth": {
         "jjpnst1bf6237d": {}
+      },
+      "function": {
+        "jjpCreateJJPOrder": {
+          "deploymentBucketName": "amplify-jjpnst-dev-214805-deployment",
+          "s3Key": "amplify-builds/jjpCreateJJPOrder-4255706c575369456255-build.zip"
+        },
+        "jjpnstLamdaLayer": {
+          "deploymentBucketName": "amplify-jjpnst-dev-214805-deployment",
+          "s3Key": "amplify-builds/jjpnstLamdaLayer-build.zip"
+        }
+      }
+    },
+    "nonCFNdata": {
+      "function": {
+        "jjpnstLamdaLayer": {
+          "layerVersionMap": {
+            "1": {
+              "permissions": [
+                {
+                  "type": "awsAccounts",
+                  "accounts": [
+                    "734822763486"
+                  ]
+                },
+                {
+                  "type": "private"
+                }
+              ],
+              "hash": "nuOBO8vMQRC6LceEZbYefC4p8kTAQr1lgTcRddJ/jLg="
+            }
+          }
+        }
       }
     }
   }
