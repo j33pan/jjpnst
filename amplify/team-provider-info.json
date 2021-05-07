@@ -10,6 +10,11 @@
       "StackName": "amplify-jjpnst-dev-214805",
       "StackId": "arn:aws:cloudformation:ca-central-1:734822763486:stack/amplify-jjpnst-dev-214805/4592e020-aed6-11eb-9dda-0e0d24da6a74",
       "AmplifyAppId": "d1rxinirr16q02"
+    },
+    "categories": {
+      "auth": {
+        "jjpnst1bf6237d": {}
+      }
     }
   }
 }
