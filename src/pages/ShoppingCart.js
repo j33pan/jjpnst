@@ -1,8 +1,9 @@
 import React from "react";
 import { CartContext } from "../contexts/cart";
 
-function ShoppingCart() {
+function ShoppingCart(props) {
   const { cart, total, add, remove } = React.useContext(CartContext);
+  const { history } = props;
 
   return (
     <div>
@@ -19,7 +20,12 @@ function ShoppingCart() {
       )}
       <hr />
       <div>Total: ${total}</div>
-      <button disabled={cart.length === 0}>Checkout</button>
+      <button
+        onClick={() => history.push("/checkout")}
+        disabled={cart.length === 0}
+      >
+        Checkout
+      </button>
     </div>
   );
 }

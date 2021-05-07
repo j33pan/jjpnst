@@ -9,6 +9,7 @@ import Products from "./pages/Products";
 import Orders from "./pages/Orders";
 import CreatProduct from "./pages/CreatProduct";
 import ShoppingCart from "./pages/ShoppingCart";
+import Checkout from "./pages/Checkout";
 Amplify.configure(awsconfig);
 
 function App() {
@@ -42,6 +43,7 @@ function App() {
           <Route component={Orders} path="/orders" exact />
           <Route component={CreatProduct} path="/createprod" exact />
           <Route component={ShoppingCart} path="/cart" exact />
+          <Route component={Checkout} path="/checkout" exact />
         </Switch>
       </Router>
     </div>
