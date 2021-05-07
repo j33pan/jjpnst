@@ -1,33 +1,15 @@
 import "./App.css";
-import Amplify, { API, graphqlOperation, input } from "aws-amplify";
+import Amplify, { API, graphqlOperation } from "aws-amplify";
 import awsconfig from "./aws-exports";
-import { listJJPOrders, listJJPProducts } from "./graphql/queries";
 import { createJJPOrder, createJJPProduct } from "./graphql/mutations";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Home from "./pages/Home";
 import Signin from "./pages/Signin";
+import Products from "./pages/Products";
+import Orders from "./pages/Orders";
 Amplify.configure(awsconfig);
 
 function App() {
-  const getprods = async () => {
-    try {
-      const response = await API.graphql({
-        query: listJJPProducts,
-        authMode: "AWS_IAM",
-      });
-      console.log(response);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-  const getorders = async () => {
-    try {
-      const response = await API.graphql(graphqlOperation(listJJPOrders));
-      console.log(response);
-    } catch (error) {
-      console.log(error);
-    }
-  };
   const creatprods = async () => {
     try {
       const input = { name: "prod000000002admin" };
@@ -50,23 +32,22 @@ function App() {
       console.log(error);
     }
   };
+
   return (
     <div>
       <Router>
         <Link to="/">Home </Link>
+        <Link to="/products">Products </Link>
+        <Link to="/orders">Orders </Link>
         <Link to="/signin">Sign in</Link>
-
+        <hr />
         <Switch>
           <Route component={Home} path="/" exact />
           <Route component={Signin} path="/signin" exact />
+          <Route component={Products} path="/products" exact />
+          <Route component={Orders} path="/orders" exact />
         </Switch>
       </Router>
-      <button onClick={getprods}>get prods</button>
-      <button onClick={getorders}>get orders</button>
-      <button onClick={creatprods}>create prod</button>
-      <button onClick={createorders}>create order</button>
-      <br />
-      <br />
     </div>
   );
 }
