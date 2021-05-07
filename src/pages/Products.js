@@ -1,6 +1,7 @@
 import React from "react";
-import Amplify, { API, graphqlOperation } from "aws-amplify";
+import { API } from "aws-amplify";
 import { listJJPProducts } from "../graphql/queries";
+import { CartContext } from "../contexts/cart";
 
 function Products() {
   const [prods, setprods] = React.useState([]);
@@ -19,12 +20,14 @@ function Products() {
   React.useEffect(() => {
     getprods();
   }, []);
+  const { add, remove } = React.useContext(CartContext);
   return (
     <div>
-      {/* <button onClick={getprods}>get prods</button> */}
       {prods.map((x) => (
         <div key={x.id}>
           {x.name}: ${x.price}
+          <button onClick={() => remove(x.id)}>-</button>
+          <button onClick={() => add(x)}>+</button>
         </div>
       ))}
     </div>
