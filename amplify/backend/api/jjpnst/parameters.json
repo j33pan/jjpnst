@@ -1,0 +1,11 @@
+{
+  "AppSyncApiName": "jjpnst",
+  "DynamoDBBillingMode": "PAY_PER_REQUEST",
+  "DynamoDBEnableServerSideEncryption": false,
+  "AuthCognitoUserPoolId": {
+    "Fn::GetAtt": [
+      "authjjpnst1bf6237d",
+      "Outputs.UserPoolId"
+    ]
+  }
+}

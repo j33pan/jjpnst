@@ -1,0 +1,40 @@
+type JJPProduct
+  @model
+  @auth(
+    rules: [
+      { allow: public, provider: iam, operations: [read] }
+      { allow: private, operations: [read] }
+      { allow: groups, groups: ["Admin"] }
+    ]
+  ) {
+  id: ID!
+  name: String
+  price: Float
+  orders: [JJPOrderProduct] @connection(keyName: "byproduct", fields: ["id"])
+}
+
+type JJPOrder
+  @model
+  @auth(rules: [{ allow: owner }, { allow: groups, groups: ["Admin"] }]) {
+  id: ID!
+  code: String
+  payable: Float
+  products: [JJPOrderProduct] @connection(keyName: "byorder", fields: ["id"])
+}
+
+type JJPOrderProduct
+  @model
+  @auth(rules: [{ allow: owner }, { allow: groups, groups: ["Admin"] }])
+  @key(name: "byorder", fields: ["orderid", "productid"])
+  @key(name: "byproduct", fields: ["productid", "orderid"]) {
+  id: ID!
+  orderid: ID!
+  productid: ID!
+  product: JJPProduct @connection(fields: ["productid"])
+  order: JJPOrder @connection(fields: ["orderid"])
+}
+
+type JJPTest @model @auth(rules: [{ allow: owner }]) {
+  id: ID!
+  note: String
+}
