@@ -4,6 +4,7 @@ const CartContext = React.createContext();
 
 const CartProvider = ({ children }) => {
   const [cart, setcart] = React.useState([]);
+  const [total, settotal] = React.useState(0);
 
   const add = (product) => {
     const { id, name, price } = product;
@@ -31,11 +32,15 @@ const CartProvider = ({ children }) => {
   };
 
   React.useEffect(() => {
-    console.log(cart);
+    const newtotal = [...cart].reduce((x, { amount, price }) => {
+      return (x += amount * price);
+    }, 0);
+    settotal(newtotal);
+    console.log(newtotal, cart);
   }, [cart]);
 
   return (
-    <CartContext.Provider value={{ cart, add, remove }}>
+    <CartContext.Provider value={{ cart, add, remove, total }}>
       {children}
     </CartContext.Provider>
   );

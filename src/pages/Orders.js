@@ -21,11 +21,15 @@ function Orders() {
   }, []);
   return (
     <div>
-      {orders.map((x) => (
-        <div key={x.id}>
-          {x.code}: ${x.payable}
-        </div>
-      ))}
+      {orders.length === 0 ? (
+        <div>No orders</div>
+      ) : (
+        orders.map((x) => (
+          <div key={x.id}>
+            {x.code}: ${x.payable}
+          </div>
+        ))
+      )}
     </div>
   );
 }
