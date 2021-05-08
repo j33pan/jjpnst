@@ -18,11 +18,15 @@
       "function": {
         "jjpcreateorder": {
           "deploymentBucketName": "amplify-jjpnst-dev-214805-deployment",
-          "s3Key": "amplify-builds/jjpcreateorder-307045373857574a4465-build.zip"
+          "s3Key": "amplify-builds/jjpcreateorder-3439767557306d44515a-build.zip"
         },
         "jjplayer": {
           "deploymentBucketName": "amplify-jjpnst-dev-214805-deployment",
           "s3Key": "amplify-builds/jjplayer-build.zip"
+        },
+        "jjpstripepay": {
+          "deploymentBucketName": "amplify-jjpnst-dev-214805-deployment",
+          "s3Key": "amplify-builds/jjpstripepay-592f5934376145765747-build.zip"
         }
       }
     },

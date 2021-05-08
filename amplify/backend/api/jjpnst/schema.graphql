@@ -38,3 +38,9 @@ type JJPTest @model @auth(rules: [{ allow: owner }]) {
   id: ID!
   note: String
 }
+
+type Mutation {
+  jjpprocessorder: String
+    @function(name: "jjpstripepay")
+    @function(name: "jjpcreateorder-${env}")
+}

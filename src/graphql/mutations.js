@@ -1,6 +1,11 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const jjpprocessorder = /* GraphQL */ `
+  mutation Jjpprocessorder {
+    jjpprocessorder
+  }
+`;
 export const createJJPProduct = /* GraphQL */ `
   mutation CreateJJPProduct(
     $input: CreateJJPProductInput!
