@@ -19,6 +19,10 @@
     "authjjpnst1bf6237dUserPoolId": {
       "Type": "String",
       "Default": "authjjpnst1bf6237dUserPoolId"
+    },
+    "functionjjplayerArn": {
+      "Type": "String",
+      "Default": "functionjjplayerArn"
     }
   },
   "Conditions": {
@@ -86,7 +90,11 @@
           ]
         },
         "Runtime": "nodejs14.x",
-        "Layers": [],
+        "Layers": [
+          {
+            "Fn::Sub": "arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:layer:jjplayer-dev:1"
+          }
+        ],
         "Timeout": "25"
       }
     },

@@ -1,5 +1,11 @@
 {
-  "lambdaLayers": [],
+  "lambdaLayers": [
+    {
+      "type": "ProjectLayer",
+      "resourceName": "jjplayer",
+      "version": 1
+    }
+  ],
   "permissions": {
     "auth": {
       "jjpnst1bf6237d": [
