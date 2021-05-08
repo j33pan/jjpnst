@@ -52,7 +52,7 @@ input CartItem {
 }
 
 type Mutation {
-  jjpprocessorder(input: JJPPO): String
+  jjpprocessorder(input: JJPPO!): String
     @function(name: "jjpstripepay-${env}")
     @function(name: "jjpcreateorder-${env}")
 }

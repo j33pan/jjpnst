@@ -1,10 +1,13 @@
+import API, { graphqlOperation } from "@aws-amplify/api";
 import React from "react";
+import { jjpprocessorder } from "../graphql/mutations";
 
 const CartContext = React.createContext();
 
 const CartProvider = ({ children }) => {
   const [cart, setcart] = React.useState([]);
   const [total, settotal] = React.useState(0);
+  const [addr, setaddr] = React.useState("");
 
   const add = (product) => {
     const { id, name, price } = product;
@@ -39,8 +42,33 @@ const CartProvider = ({ children }) => {
     console.log(newtotal, cart);
   }, [cart]);
 
+  const processorder = () => {
+    const input = {
+      address: addr,
+      token: "12345623",
+      cart: [...cart].map((x) => {
+        return { id: x.id, amount: x.amount };
+      }),
+    };
+    console.log(input);
+    process(input);
+  };
+
+  const process = async (input) => {
+    try {
+      const response = await API.graphql(
+        graphqlOperation(jjpprocessorder, { input: input })
+      );
+      console.log(response);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
-    <CartContext.Provider value={{ cart, add, remove, total }}>
+    <CartContext.Provider
+      value={{ cart, add, remove, total, setaddr, processorder }}
+    >
       {children}
     </CartContext.Provider>
   );

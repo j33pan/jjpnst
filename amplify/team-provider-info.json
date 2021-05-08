@@ -26,7 +26,7 @@
         },
         "jjpstripepay": {
           "deploymentBucketName": "amplify-jjpnst-dev-214805-deployment",
-          "s3Key": "amplify-builds/jjpstripepay-6865466c336867694f6e-build.zip"
+          "s3Key": "amplify-builds/jjpstripepay-4b77426f48366a4a3236-build.zip"
         }
       }
     },
