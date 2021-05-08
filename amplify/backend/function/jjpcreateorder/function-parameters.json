@@ -1,3 +1,25 @@
 {
-  "lambdaLayers": []
+  "lambdaLayers": [
+    {
+      "type": "ProjectLayer",
+      "resourceName": "jjplayer",
+      "version": 1
+    }
+  ],
+  "permissions": {
+    "storage": {
+      "JJPOrder:@model(appsync)": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ],
+      "JJPOrderProduct:@model(appsync)": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ]
+    }
+  }
 }

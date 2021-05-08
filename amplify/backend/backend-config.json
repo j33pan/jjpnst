@@ -32,7 +32,23 @@
     "jjpcreateorder": {
       "build": true,
       "providerPlugin": "awscloudformation",
-      "service": "Lambda"
+      "service": "Lambda",
+      "dependsOn": [
+        {
+          "category": "api",
+          "resourceName": "jjpnst",
+          "attributes": [
+            "GraphQLAPIIdOutput"
+          ]
+        },
+        {
+          "category": "function",
+          "resourceName": "jjplayer",
+          "attributes": [
+            "Arn"
+          ]
+        }
+      ]
     },
     "jjplayer": {
       "providerPlugin": "awscloudformation",

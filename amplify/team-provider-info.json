@@ -16,7 +16,14 @@
         "jjpnst1bf6237d": {}
       },
       "function": {
-        "jjpcreateorder": {}
+        "jjpcreateorder": {
+          "deploymentBucketName": "amplify-jjpnst-dev-214805-deployment",
+          "s3Key": "amplify-builds/jjpcreateorder-307045373857574a4465-build.zip"
+        },
+        "jjplayer": {
+          "deploymentBucketName": "amplify-jjpnst-dev-214805-deployment",
+          "s3Key": "amplify-builds/jjplayer-build.zip"
+        }
       }
     },
     "nonCFNdata": {
@@ -28,7 +35,8 @@
                 {
                   "type": "private"
                 }
-              ]
+              ],
+              "hash": "wxBemeechiVhTr0KiYQ13PEmezndMF390XaQrNNNw6M="
             }
           }
         }
