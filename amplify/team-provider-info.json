@@ -14,6 +14,24 @@
     "categories": {
       "auth": {
         "jjpnst1bf6237d": {}
+      },
+      "function": {
+        "jjpcreateorder": {}
+      }
+    },
+    "nonCFNdata": {
+      "function": {
+        "jjplayer": {
+          "layerVersionMap": {
+            "1": {
+              "permissions": [
+                {
+                  "type": "private"
+                }
+              ]
+            }
+          }
+        }
       }
     }
   }
