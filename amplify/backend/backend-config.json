@@ -28,5 +28,11 @@
       }
     }
   },
-  "function": {}
+  "function": {
+    "jjpcreateorder": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    }
+  }
 }
