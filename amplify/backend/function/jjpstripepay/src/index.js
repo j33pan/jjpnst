@@ -16,6 +16,7 @@ const docClient = new AWS.DynamoDB.DocumentClient();
 exports.handler = async (event) => {
   const { cart, token, address } = event.arguments.input;
   const { username } = event.identity.claims;
+  const email = await getUserEmail(event);
 
   try {
     // await stripe with total & token
@@ -26,7 +27,7 @@ exports.handler = async (event) => {
       payable += data.Item.price * cart[i].amount;
     }
 
-    return { payable, cart, username, address };
+    return { payable, cart, username, address, email };
   } catch (error) {
     console.error(error);
   }
@@ -44,3 +45,19 @@ async function getItem(id) {
     return err;
   }
 }
+
+const getUserEmail = async (event) => {
+  const params = {
+    UserPoolId: process.env.AUTH_JJPNST1BF6237D_USERPOOLID,
+    Username: event.identity.claims.username,
+  };
+  const user = await cognitoIdentityServiceProvider
+    .adminGetUser(params)
+    .promise();
+  const { Value: email } = user.UserAttributes.find((attr) => {
+    if (attr.Name === "email") {
+      return attr.Value;
+    }
+  });
+  return email;
+};

@@ -20,6 +20,7 @@ type JJPOrder
   code: String
   payable: Float
   address: String
+  email: String
   products: [JJPOrderProduct] @connection(keyName: "byorder", fields: ["id"])
 }
 

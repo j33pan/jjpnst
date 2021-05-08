@@ -8,6 +8,7 @@ export const getJJPOrder = /* GraphQL */ `
       code
       payable
       address
+      email
       products {
         nextToken
       }
@@ -29,6 +30,7 @@ export const listJJPOrders = /* GraphQL */ `
         code
         payable
         address
+        email
         createdAt
         updatedAt
         owner
@@ -49,6 +51,7 @@ export const getJJPOrderProduct = /* GraphQL */ `
         code
         payable
         address
+        email
         createdAt
         updatedAt
         owner

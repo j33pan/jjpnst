@@ -1,3 +1,4 @@
+import { withAuthenticator } from "@aws-amplify/ui-react";
 import React from "react";
 import { CartContext } from "../contexts/cart";
 
@@ -23,4 +24,4 @@ function Checkout() {
   );
 }
 
-export default Checkout;
+export default withAuthenticator(Checkout);

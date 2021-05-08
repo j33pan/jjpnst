@@ -13,18 +13,18 @@ const docClient = new AWS.DynamoDB.DocumentClient();
 const { v4: uuidv4 } = require("uuid");
 
 exports.handler = async (event) => {
-  const { payable, cart, username, address } = event.prev.result;
+  const { payable, cart, username, address, email } = event.prev.result;
   const id = uuidv4();
   try {
-    await cerateorder(id, username, payable, address);
-    await createorderprod(id, cart);
+    await cerateorder(id, username, payable, address, email);
+    await createorderprod(id, cart, username);
     return "SUCCESS";
   } catch (err) {
     return "FAIL";
   }
 };
 
-async function cerateorder(id, user, payable, address) {
+async function cerateorder(id, user, payable, address, email) {
   const params = {
     TableName: process.env.API_JJPNST_JJPORDERTABLE_NAME,
     Item: {
@@ -36,6 +36,7 @@ async function cerateorder(id, user, payable, address) {
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
       owner: user,
+      email: email,
     },
   };
   try {
@@ -45,7 +46,7 @@ async function cerateorder(id, user, payable, address) {
   }
 }
 
-async function createorderprod(id, cart) {
+async function createorderprod(id, cart, user) {
   let ops = [];
   for (let i = 0; i < cart.length; i++) {
     ops.push({
@@ -58,6 +59,7 @@ async function createorderprod(id, cart) {
           __typename: "JJPOrderProduct",
           createdAt: new Date().toISOString(),
           updatedAt: new Date().toISOString(),
+          owner: user,
         },
       },
     });

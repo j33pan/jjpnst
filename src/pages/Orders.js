@@ -36,10 +36,10 @@ function Orders() {
       {orders.length === 0 ? (
         <div>No orders</div>
       ) : (
-        orders.map(({ id, payable }, index) => (
+        orders.map(({ id, payable, email }, index) => (
           <div key={id}>
-            <button onClick={() => getorddetails(id)}>View</button> ORD {id}: $
-            {payable}
+            <button onClick={() => getorddetails(id)}>View</button>
+            Order-{id}: ${payable}, {email}
           </div>
         ))
       )}
