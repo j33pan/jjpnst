@@ -43,6 +43,7 @@ export const getJJPOrderProduct = /* GraphQL */ `
       id
       orderid
       productid
+      amount
       order {
         id
         code
@@ -80,6 +81,7 @@ export const listJJPOrderProducts = /* GraphQL */ `
         id
         orderid
         productid
+        amount
         createdAt
         updatedAt
         owner

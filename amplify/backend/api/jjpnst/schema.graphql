@@ -31,6 +31,7 @@ type JJPOrderProduct
   id: ID!
   orderid: ID!
   productid: ID!
+  amount: Int
   product: JJPProduct @connection(fields: ["productid"])
   order: JJPOrder @connection(fields: ["orderid"])
 }

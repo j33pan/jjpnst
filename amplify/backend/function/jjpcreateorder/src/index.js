@@ -54,6 +54,7 @@ async function createorderprod(id, cart) {
           id: uuidv4(),
           orderid: id,
           productid: cart[i].id,
+          amount: cart[i].amount,
           __typename: "JJPOrderProduct",
           createdAt: new Date().toISOString(),
           updatedAt: new Date().toISOString(),

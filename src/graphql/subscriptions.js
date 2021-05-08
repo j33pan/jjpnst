@@ -55,6 +55,7 @@ export const onCreateJJPOrderProduct = /* GraphQL */ `
       id
       orderid
       productid
+      amount
       order {
         id
         code
@@ -83,6 +84,7 @@ export const onUpdateJJPOrderProduct = /* GraphQL */ `
       id
       orderid
       productid
+      amount
       order {
         id
         code
@@ -111,6 +113,7 @@ export const onDeleteJJPOrderProduct = /* GraphQL */ `
       id
       orderid
       productid
+      amount
       order {
         id
         code
