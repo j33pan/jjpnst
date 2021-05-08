@@ -12,14 +12,26 @@ const AWS = require("aws-sdk");
 const docClient = new AWS.DynamoDB.DocumentClient();
 const { v4: uuidv4 } = require("uuid");
 
-async function createItem(id, user, payable, address) {
+exports.handler = async (event) => {
+  const { payable, cart, username, address } = event.prev.result;
+  const id = uuidv4();
+  try {
+    await cerateorder(id, username, payable, address);
+    await createorderprod(id, cart);
+    return "SUCCESS";
+  } catch (err) {
+    return "FAIL";
+  }
+};
+
+async function cerateorder(id, user, payable, address) {
   const params = {
     TableName: process.env.API_JJPNST_JJPORDERTABLE_NAME,
     Item: {
       id: id,
       // code: "from appsync",
       payable: payable,
-      _typename: "JJPOrder",
+      __typename: "JJPOrder",
       address: address,
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
@@ -33,13 +45,30 @@ async function createItem(id, user, payable, address) {
   }
 }
 
-exports.handler = async (event) => {
-  const { total, cart, user, payable, address } = event.prev.result;
-  const id = uuidv4();
-  try {
-    await createItem(id, user, payable, address);
-    return "SUCCESS";
-  } catch (err) {
-    return "FAIL";
+async function createorderprod(id, cart) {
+  let ops = [];
+  for (let i = 0; i < cart.length; i++) {
+    ops.push({
+      PutRequest: {
+        Item: {
+          id: uuidv4(),
+          orderid: id,
+          productid: cart[i].id,
+          __typename: "JJPOrderProduct",
+          createdAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString(),
+        },
+      },
+    });
   }
-};
+  let params = { RequestItems: {} };
+  params["RequestItems"][
+    process.env.API_JJPNST_JJPORDERPRODUCTTABLE_NAME
+  ] = ops;
+
+  try {
+    await docClient.batchWrite(params).promise();
+  } catch (err) {
+    return err;
+  }
+}

@@ -35,17 +35,17 @@
       "service": "Lambda",
       "dependsOn": [
         {
-          "category": "function",
-          "resourceName": "jjplayer",
-          "attributes": [
-            "Arn"
-          ]
-        },
-        {
           "category": "api",
           "resourceName": "jjpnst",
           "attributes": [
             "GraphQLAPIIdOutput"
+          ]
+        },
+        {
+          "category": "function",
+          "resourceName": "jjplayer",
+          "attributes": [
+            "Arn"
           ]
         }
       ]
@@ -61,17 +61,24 @@
       "service": "Lambda",
       "dependsOn": [
         {
-          "category": "function",
-          "resourceName": "jjplayer",
-          "attributes": [
-            "Arn"
-          ]
-        },
-        {
           "category": "auth",
           "resourceName": "jjpnst1bf6237d",
           "attributes": [
             "UserPoolId"
+          ]
+        },
+        {
+          "category": "api",
+          "resourceName": "jjpnst",
+          "attributes": [
+            "GraphQLAPIIdOutput"
+          ]
+        },
+        {
+          "category": "function",
+          "resourceName": "jjplayer",
+          "attributes": [
+            "Arn"
           ]
         }
       ]

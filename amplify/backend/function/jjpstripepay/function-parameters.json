@@ -11,6 +11,11 @@
       "jjpnst1bf6237d": [
         "read"
       ]
+    },
+    "storage": {
+      "JJPProduct:@model(appsync)": [
+        "read"
+      ]
     }
   }
 }

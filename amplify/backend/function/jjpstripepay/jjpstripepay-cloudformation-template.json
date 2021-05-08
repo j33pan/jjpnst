@@ -23,6 +23,10 @@
     "functionjjplayerArn": {
       "Type": "String",
       "Default": "functionjjplayerArn"
+    },
+    "apijjpnstGraphQLAPIIdOutput": {
+      "Type": "String",
+      "Default": "apijjpnstGraphQLAPIIdOutput"
     }
   },
   "Conditions": {
@@ -80,6 +84,35 @@
             },
             "AUTH_JJPNST1BF6237D_USERPOOLID": {
               "Ref": "authjjpnst1bf6237dUserPoolId"
+            },
+            "API_JJPNST_JJPPRODUCTTABLE_NAME": {
+              "Fn::ImportValue": {
+                "Fn::Sub": "${apijjpnstGraphQLAPIIdOutput}:GetAtt:JJPProductTable:Name"
+              }
+            },
+            "API_JJPNST_JJPPRODUCTTABLE_ARN": {
+              "Fn::Join": [
+                "",
+                [
+                  "arn:aws:dynamodb:",
+                  {
+                    "Ref": "AWS::Region"
+                  },
+                  ":",
+                  {
+                    "Ref": "AWS::AccountId"
+                  },
+                  ":table/",
+                  {
+                    "Fn::ImportValue": {
+                      "Fn::Sub": "${apijjpnstGraphQLAPIIdOutput}:GetAtt:JJPProductTable:Name"
+                    }
+                  }
+                ]
+              ]
+            },
+            "API_JJPNST_GRAPHQLAPIIDOUTPUT": {
+              "Ref": "apijjpnstGraphQLAPIIdOutput"
             }
           }
         },
@@ -230,6 +263,62 @@
                       {
                         "Ref": "authjjpnst1bf6237dUserPoolId"
                       }
+                    ]
+                  ]
+                }
+              ]
+            },
+            {
+              "Effect": "Allow",
+              "Action": [
+                "dynamodb:Get*",
+                "dynamodb:BatchGetItem",
+                "dynamodb:List*",
+                "dynamodb:Describe*",
+                "dynamodb:Scan",
+                "dynamodb:Query"
+              ],
+              "Resource": [
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:aws:dynamodb:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":",
+                      {
+                        "Ref": "AWS::AccountId"
+                      },
+                      ":table/",
+                      {
+                        "Fn::ImportValue": {
+                          "Fn::Sub": "${apijjpnstGraphQLAPIIdOutput}:GetAtt:JJPProductTable:Name"
+                        }
+                      }
+                    ]
+                  ]
+                },
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:aws:dynamodb:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":",
+                      {
+                        "Ref": "AWS::AccountId"
+                      },
+                      ":table/",
+                      {
+                        "Fn::ImportValue": {
+                          "Fn::Sub": "${apijjpnstGraphQLAPIIdOutput}:GetAtt:JJPProductTable:Name"
+                        }
+                      },
+                      "/index/*"
                     ]
                   ]
                 }
