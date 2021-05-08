@@ -18,7 +18,7 @@
       "function": {
         "jjpcreateorder": {
           "deploymentBucketName": "amplify-jjpnst-dev-214805-deployment",
-          "s3Key": "amplify-builds/jjpcreateorder-3439767557306d44515a-build.zip"
+          "s3Key": "amplify-builds/jjpcreateorder-387a594450526a516767-build.zip"
         },
         "jjplayer": {
           "deploymentBucketName": "amplify-jjpnst-dev-214805-deployment",
@@ -26,7 +26,7 @@
         },
         "jjpstripepay": {
           "deploymentBucketName": "amplify-jjpnst-dev-214805-deployment",
-          "s3Key": "amplify-builds/jjpstripepay-592f5934376145765747-build.zip"
+          "s3Key": "amplify-builds/jjpstripepay-6865466c336867694f6e-build.zip"
         }
       }
     },

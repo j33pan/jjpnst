@@ -7,6 +7,7 @@ export const onCreateJJPOrder = /* GraphQL */ `
       id
       code
       payable
+      address
       products {
         nextToken
       }
@@ -22,6 +23,7 @@ export const onUpdateJJPOrder = /* GraphQL */ `
       id
       code
       payable
+      address
       products {
         nextToken
       }
@@ -37,6 +39,7 @@ export const onDeleteJJPOrder = /* GraphQL */ `
       id
       code
       payable
+      address
       products {
         nextToken
       }
@@ -56,6 +59,7 @@ export const onCreateJJPOrderProduct = /* GraphQL */ `
         id
         code
         payable
+        address
         createdAt
         updatedAt
         owner
@@ -83,6 +87,7 @@ export const onUpdateJJPOrderProduct = /* GraphQL */ `
         id
         code
         payable
+        address
         createdAt
         updatedAt
         owner
@@ -110,6 +115,7 @@ export const onDeleteJJPOrderProduct = /* GraphQL */ `
         id
         code
         payable
+        address
         createdAt
         updatedAt
         owner

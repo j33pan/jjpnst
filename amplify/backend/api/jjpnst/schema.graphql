@@ -19,6 +19,7 @@ type JJPOrder
   id: ID!
   code: String
   payable: Float
+  address: String
   products: [JJPOrderProduct] @connection(keyName: "byorder", fields: ["id"])
 }
 
@@ -39,8 +40,19 @@ type JJPTest @model @auth(rules: [{ allow: owner }]) {
   note: String
 }
 
+input JJPPO {
+  cart: [CartItem]
+  token: String
+  address: String
+}
+
+input CartItem {
+  id: ID
+  amount: Int
+}
+
 type Mutation {
-  jjpprocessorder: String
-    @function(name: "jjpstripepay")
+  jjpprocessorder(input: JJPPO): String
+    @function(name: "jjpstripepay-${env}")
     @function(name: "jjpcreateorder-${env}")
 }

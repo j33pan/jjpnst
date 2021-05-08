@@ -2,8 +2,8 @@
 // this is an auto generated file. This will be overwritten
 
 export const jjpprocessorder = /* GraphQL */ `
-  mutation Jjpprocessorder {
-    jjpprocessorder
+  mutation Jjpprocessorder($input: JJPPO) {
+    jjpprocessorder(input: $input)
   }
 `;
 export const createJJPProduct = /* GraphQL */ `
@@ -66,6 +66,7 @@ export const createJJPOrder = /* GraphQL */ `
       id
       code
       payable
+      address
       products {
         nextToken
       }
@@ -84,6 +85,7 @@ export const updateJJPOrder = /* GraphQL */ `
       id
       code
       payable
+      address
       products {
         nextToken
       }
@@ -102,6 +104,7 @@ export const deleteJJPOrder = /* GraphQL */ `
       id
       code
       payable
+      address
       products {
         nextToken
       }
@@ -124,6 +127,7 @@ export const createJJPOrderProduct = /* GraphQL */ `
         id
         code
         payable
+        address
         createdAt
         updatedAt
         owner
@@ -154,6 +158,7 @@ export const updateJJPOrderProduct = /* GraphQL */ `
         id
         code
         payable
+        address
         createdAt
         updatedAt
         owner
@@ -184,6 +189,7 @@ export const deleteJJPOrderProduct = /* GraphQL */ `
         id
         code
         payable
+        address
         createdAt
         updatedAt
         owner

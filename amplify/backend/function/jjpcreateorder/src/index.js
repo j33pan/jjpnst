@@ -12,16 +12,20 @@ const AWS = require("aws-sdk");
 const docClient = new AWS.DynamoDB.DocumentClient();
 const { v4: uuidv4 } = require("uuid");
 
-const params = {
-  TableName: process.env.API_JJPNST_JJPORDERPRODUCTTABLE_NAME,
-  /* Item properties will depend on your application concerns */
-  Item: {
-    id: uuidv4(),
-    code: "some code...",
-  },
-};
-
-async function createItem() {
+async function createItem(id, user, payable, address) {
+  const params = {
+    TableName: process.env.API_JJPNST_JJPORDERTABLE_NAME,
+    Item: {
+      id: id,
+      // code: "from appsync",
+      payable: payable,
+      _typename: "JJPOrder",
+      address: address,
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+      owner: user,
+    },
+  };
   try {
     await docClient.put(params).promise();
   } catch (err) {
@@ -30,21 +34,12 @@ async function createItem() {
 }
 
 exports.handler = async (event) => {
+  const { total, cart, user, payable, address } = event.prev.result;
+  const id = uuidv4();
   try {
-    await createItem();
-    return { body: "Successfully created item!" };
+    await createItem(id, user, payable, address);
+    return "SUCCESS";
   } catch (err) {
-    return { error: err };
+    return "FAIL";
   }
-  //   // TODO implement
-  //   const response = {
-  //     statusCode: 200,
-  //     //  Uncomment below to enable CORS requests
-  //     headers: {
-  //       "Access-Control-Allow-Origin": "*",
-  //       "Access-Control-Allow-Headers": "*",
-  //     },
-  //     body: JSON.stringify("Hello from Lambda!"),
-  //   };
-  //   return response;
 };
