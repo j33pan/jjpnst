@@ -92,7 +92,7 @@
         "Runtime": "nodejs14.x",
         "Layers": [
           {
-            "Fn::Sub": "arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:layer:jjplayer-dev:1"
+            "Fn::Sub": "arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:layer:jjplayer-dev:2"
           }
         ],
         "Timeout": "25"

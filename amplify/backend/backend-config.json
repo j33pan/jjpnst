@@ -35,17 +35,17 @@
       "service": "Lambda",
       "dependsOn": [
         {
-          "category": "api",
-          "resourceName": "jjpnst",
-          "attributes": [
-            "GraphQLAPIIdOutput"
-          ]
-        },
-        {
           "category": "function",
           "resourceName": "jjplayer",
           "attributes": [
             "Arn"
+          ]
+        },
+        {
+          "category": "api",
+          "resourceName": "jjpnst",
+          "attributes": [
+            "GraphQLAPIIdOutput"
           ]
         }
       ]

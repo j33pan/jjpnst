@@ -4,6 +4,7 @@
   "main": "index.js",
   "dependencies": {
     "aws-sdk": "^2.903.0",
+    "stripe": "^8.148.0",
     "uuid": "^8.3.2"
   },
   "devDependencies": {}
