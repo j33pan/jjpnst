@@ -73,7 +73,7 @@ const response = await API.graphql(graphqlOperation(getJJPOrder, { id: id }));
 
 ### Schema Design
 
-```JSON
+```graphql
 type JJPProduct
   @model
   @auth(
