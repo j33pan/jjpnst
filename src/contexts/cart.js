@@ -1,7 +1,12 @@
 import API, { graphqlOperation } from "@aws-amplify/api";
 import React from "react";
 import { jjpprocessorder } from "../graphql/mutations";
-
+import { loadStripe } from "@stripe/stripe-js";
+// Make sure to call `loadStripe` outside of a component’s render to avoid
+// recreating the `Stripe` object on every render.
+const stripePromise = loadStripe(
+  "pk_test_51InRYpETKhgF1UqhaXOYOg7AY9mYMbSoKjjpJEfZG6bvVEQwjpywJI1rEY8EMSmYcrMkh5U8gC4sDHPTBqjcfMSU00CdKJUuKP"
+);
 const CartContext = React.createContext();
 
 const CartProvider = ({ children }) => {
@@ -56,10 +61,14 @@ const CartProvider = ({ children }) => {
 
   const process = async (input) => {
     try {
+      const stripe = await stripePromise;
       const response = await API.graphql(
         graphqlOperation(jjpprocessorder, { input: input })
       );
-      console.log(response);
+      const sessionId = response.data.jjpprocessorder;
+      console.log(sessionId);
+      const res = await stripe.redirectToCheckout({ sessionId: sessionId });
+      if (res.error) console.error(res.error);
     } catch (error) {
       console.error(error);
     }

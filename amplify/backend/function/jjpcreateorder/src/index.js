@@ -13,12 +13,19 @@ const docClient = new AWS.DynamoDB.DocumentClient();
 const { v4: uuidv4 } = require("uuid");
 
 exports.handler = async (event) => {
-  const { payable, cart, username, address, email } = event.prev.result;
+  const {
+    payable,
+    cart,
+    username,
+    address,
+    email,
+    sessionId,
+  } = event.prev.result;
   const id = uuidv4();
   try {
     await cerateorder(id, username, payable, address, email);
     await createorderprod(id, cart, username);
-    return "SUCCESS";
+    return sessionId;
   } catch (err) {
     return "FAIL";
   }
