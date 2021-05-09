@@ -1,70 +1,137 @@
-# Getting Started with Create React App
+# JJPNST
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+- Building this project to practice integration of different technologies! Also in case I want to sell cakes in the future :laughing:
+- I have a React client app that sends requests to a GraphQL API which reads and writes to a DynamoDB database.
+- The product is integrated with Stripe API to handle payment.
+- The product is protected by AWS Cognito authentication.
 
-## Available Scripts
+### Functionalities
 
-In the project directory, you can run:
+###### List Products
 
-### `npm start`
+```javascript
+const response = await API.graphql({
+  query: listJJPProducts,
+  authMode: "AWS_IAM",
+});
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- API endpoint protected by AWS_IAM role
+- Guests, authenticated users and admins has access to product list
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+###### Add to Cart
 
-### `npm test`
+- all types of users can add to cart. This is purely frontend
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+###### Checkout
 
-### `npm run build`
+- API endpoint protected by AMAZON_COGNITO_USER_POOLS
+- Guests does not have access to checkout
+- Authenticated users can checkout
+- It triggers a PipeLine Resolver, which executes 2 Lambda functions sequentially. The first Lambda function creates a stripe session. The second Lamda function creates a JJPOrder for the user.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```javascript
+const response = await API.graphql(
+  graphqlOperation(jjpprocessorder, { input: input })
+);
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- The pipeline accepts product ids and quantity, gets the product price from the database, and calculates the total amount to charge. When finished execution, it returns a session id to the client.
+- The client uses the session id to redirect the customer to Stripe checkout
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```javascript
+const res = await stripe.redirectToCheckout({
+  sessionId: sessionId,
+});
+```
 
-### `npm run eject`
+- On success, Stripe redirects to the success page which we provided when creating a Stripe session
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+###### List Orders
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```javascript
+const response = await API.graphql({
+  query: listJJPOrders,
+});
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+- API endpoint protected by AMAZON_COGNITO_USER_POOLS
+- Guests does not have access to order list
+- Authenticated users can view their own orders (JJPOrder.owner stores username)
+- Admins can view all orders
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+###### View Order Details
 
-## Learn More
+```javascript
+const response = await API.graphql(graphqlOperation(getJJPOrder, { id: id }));
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- API endpoint protected by AMAZON_COGNITO_USER_POOLS
+- Guests does not have access to order list
+- Authenticated users can view their own orders' details (JJPOrder.owner stores username)
+- Admins can view all orders' details
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Schema Design
 
-### Code Splitting
+```
+type JJPProduct
+  @model
+  @auth(
+    rules: [
+      { allow: public, provider: iam, operations: [read] }
+      { allow: private, operations: [read] }
+      { allow: groups, groups: ["Admin"] }
+    ]
+  ) {
+  id: ID!
+  name: String
+  price: Float
+  orders: [JJPOrderProduct] @connection(keyName: "byproduct", fields: ["id"])
+}
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+type JJPOrder
+  @model
+  @auth(rules: [{ allow: owner }, { allow: groups, groups: ["Admin"] }]) {
+  id: ID!
+  code: String
+  payable: Float
+  address: String
+  email: String
+  products: [JJPOrderProduct] @connection(keyName: "byorder", fields: ["id"])
+}
 
-### Analyzing the Bundle Size
+type JJPOrderProduct
+  @model
+  @auth(rules: [{ allow: owner }, { allow: groups, groups: ["Admin"] }])
+  @key(name: "byorder", fields: ["orderid", "productid"])
+  @key(name: "byproduct", fields: ["productid", "orderid"]) {
+  id: ID!
+  orderid: ID!
+  productid: ID!
+  amount: Int
+  product: JJPProduct @connection(fields: ["productid"])
+  order: JJPOrder @connection(fields: ["orderid"])
+}
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+type JJPTest @model @auth(rules: [{ allow: owner }]) {
+  id: ID!
+  note: String
+}
 
-### Making a Progressive Web App
+input JJPPO {
+  cart: [CartItem]
+  token: String
+  address: String
+}
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+input CartItem {
+  id: ID
+  amount: Int
+}
 
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+type Mutation {
+  jjpprocessorder(input: JJPPO!): String
+    @function(name: "jjpstripepay-${env}")
+    @function(name: "jjpcreateorder-${env}")
+}
+```
