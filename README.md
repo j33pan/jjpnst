@@ -7,6 +7,8 @@
 - The payment process is handled by a pipeline resolver which executes two Lambda Functions sequentially, integrating with Stripe API.
 - The product is protected by AWS Cognito authentication.
 
+![Image of Yaktocat](https://raw.githubusercontent.com/j33pan/jjpnst/master/public/jjpnst_structure.png)
+
 ### Functionalities
 
 #### List Products
