@@ -1,13 +1,15 @@
 # JJPNST
 
 - Building this project to practice integration of different technologies! Also in case I want to sell cakes in the future :laughing:
-- the React client app sends requests to a GraphQL API which reads and writes to a DynamoDB database.
-- The payment process is handled by a pipeline resolver that executes two Lambda functions sequentially, integrating with Stripe API.
+- Using [AWS Amplify CLI](https://docs.amplify.aws/cli) to create the GraphQL API, DynamoDB, Cognito User Pool, Lambda Functions and Lambda Layers.
+- Using [Create React App](https://github.com/facebook/create-react-app) to create the client app.
+- the client app sends requests to the GraphQL API which reads and writes to the DynamoDB.
+- The payment process is handled by a pipeline resolver which executes two Lambda Functions sequentially, integrating with Stripe API.
 - The product is protected by AWS Cognito authentication.
 
 ### Functionalities
 
-##### List Products
+#### List Products
 
 ```javascript
 const response = await API.graphql({
@@ -19,11 +21,11 @@ const response = await API.graphql({
 - API endpoint protected by AWS_IAM role
 - Guests, authenticated users and admins has access to product list
 
-##### Add to Cart
+#### Add to Cart
 
 - all types of users can add to cart. This is purely frontend
 
-##### Checkout
+#### Checkout
 
 - API endpoint protected by AMAZON_COGNITO_USER_POOLS
 - Guests does not have access to checkout
@@ -47,7 +49,7 @@ const res = await stripe.redirectToCheckout({
 
 - On success, Stripe redirects to the success page which we provided when creating a Stripe session
 
-##### List Orders
+#### List Orders
 
 ```javascript
 const response = await API.graphql({
@@ -60,7 +62,7 @@ const response = await API.graphql({
 - Authenticated users can view their own orders (JJPOrder.owner stores username)
 - Admins can view all orders
 
-##### View Order Details
+#### View Order Details
 
 ```javascript
 const response = await API.graphql(graphqlOperation(getJJPOrder, { id: id }));
@@ -72,6 +74,8 @@ const response = await API.graphql(graphqlOperation(getJJPOrder, { id: id }));
 - Admins can view all orders' details
 
 ### Schema Design
+
+Many-to-many relationship between JJPProduct table and JJPOrder table
 
 ```graphql
 type JJPProduct
@@ -111,11 +115,6 @@ type JJPOrderProduct
   amount: Int
   product: JJPProduct @connection(fields: ["productid"])
   order: JJPOrder @connection(fields: ["orderid"])
-}
-
-type JJPTest @model @auth(rules: [{ allow: owner }]) {
-  id: ID!
-  note: String
 }
 
 input JJPPO {
