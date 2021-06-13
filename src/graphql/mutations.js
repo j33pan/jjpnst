@@ -216,6 +216,69 @@ export const deleteJJPOrderProduct = /* GraphQL */ `
     }
   }
 `;
+export const createJJPFavorate = /* GraphQL */ `
+  mutation CreateJJPFavorate(
+    $input: CreateJJPFavorateInput!
+    $condition: ModelJJPFavorateConditionInput
+  ) {
+    createJJPFavorate(input: $input, condition: $condition) {
+      id
+      productid
+      createdAt
+      updatedAt
+      product {
+        id
+        name
+        price
+        createdAt
+        updatedAt
+      }
+      owner
+    }
+  }
+`;
+export const updateJJPFavorate = /* GraphQL */ `
+  mutation UpdateJJPFavorate(
+    $input: UpdateJJPFavorateInput!
+    $condition: ModelJJPFavorateConditionInput
+  ) {
+    updateJJPFavorate(input: $input, condition: $condition) {
+      id
+      productid
+      createdAt
+      updatedAt
+      product {
+        id
+        name
+        price
+        createdAt
+        updatedAt
+      }
+      owner
+    }
+  }
+`;
+export const deleteJJPFavorate = /* GraphQL */ `
+  mutation DeleteJJPFavorate(
+    $input: DeleteJJPFavorateInput!
+    $condition: ModelJJPFavorateConditionInput
+  ) {
+    deleteJJPFavorate(input: $input, condition: $condition) {
+      id
+      productid
+      createdAt
+      updatedAt
+      product {
+        id
+        name
+        price
+        createdAt
+        updatedAt
+      }
+      owner
+    }
+  }
+`;
 export const createJJPTest = /* GraphQL */ `
   mutation CreateJJPTest(
     $input: CreateJJPTestInput!

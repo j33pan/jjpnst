@@ -11,6 +11,7 @@ import CreatProduct from "./pages/CreatProduct";
 import ShoppingCart from "./pages/ShoppingCart";
 import Checkout from "./pages/Checkout";
 import PaymentSuccess from "./pages/PaymentSuccess";
+import { Favorates } from "./pages/Favorates";
 Amplify.configure(awsconfig);
 
 function App() {
@@ -36,6 +37,7 @@ function App() {
           <Link to="/cart">Cart</Link>
           <Link to="/orders">Orders </Link>
           <Link to="/signin">Sign in</Link>
+          <Link to="/favorates">Favorates</Link>
         </div>
         <Switch>
           <Route component={Home} path="/" exact />
@@ -46,6 +48,7 @@ function App() {
           <Route component={ShoppingCart} path="/cart" exact />
           <Route component={Checkout} path="/checkout" exact />
           <Route component={PaymentSuccess} path="/paymentsuccess" exact />
+          <Route component={Favorates} path="/favorates" exact />
         </Switch>
       </Router>
     </div>

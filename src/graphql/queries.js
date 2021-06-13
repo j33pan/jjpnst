@@ -93,6 +93,49 @@ export const listJJPOrderProducts = /* GraphQL */ `
     }
   }
 `;
+export const getJJPFavorate = /* GraphQL */ `
+  query GetJJPFavorate($id: ID!) {
+    getJJPFavorate(id: $id) {
+      id
+      productid
+      createdAt
+      updatedAt
+      product {
+        id
+        name
+        price
+        createdAt
+        updatedAt
+      }
+      owner
+    }
+  }
+`;
+export const listJJPFavorates = /* GraphQL */ `
+  query ListJJPFavorates(
+    $filter: ModelJJPFavorateFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listJJPFavorates(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        productid
+        createdAt
+        updatedAt
+        product {
+          id
+          name
+          price
+          createdAt
+          updatedAt
+        }
+        owner
+      }
+      nextToken
+    }
+  }
+`;
 export const getJJPTest = /* GraphQL */ `
   query GetJJPTest($id: ID!) {
     getJJPTest(id: $id) {

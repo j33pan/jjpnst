@@ -37,6 +37,12 @@ type JJPOrderProduct
   order: JJPOrder @connection(fields: ["orderid"])
 }
 
+type JJPFavorate @model @auth(rules: [{ allow: owner }]) {
+  id: ID!
+  productid: ID!
+  product: JJPProduct @connection(fields: ["productid"])
+}
+
 type JJPTest @model @auth(rules: [{ allow: owner }]) {
   id: ID!
   note: String

@@ -142,6 +142,60 @@ export const onDeleteJJPOrderProduct = /* GraphQL */ `
     }
   }
 `;
+export const onCreateJJPFavorate = /* GraphQL */ `
+  subscription OnCreateJJPFavorate($owner: String!) {
+    onCreateJJPFavorate(owner: $owner) {
+      id
+      productid
+      createdAt
+      updatedAt
+      product {
+        id
+        name
+        price
+        createdAt
+        updatedAt
+      }
+      owner
+    }
+  }
+`;
+export const onUpdateJJPFavorate = /* GraphQL */ `
+  subscription OnUpdateJJPFavorate($owner: String!) {
+    onUpdateJJPFavorate(owner: $owner) {
+      id
+      productid
+      createdAt
+      updatedAt
+      product {
+        id
+        name
+        price
+        createdAt
+        updatedAt
+      }
+      owner
+    }
+  }
+`;
+export const onDeleteJJPFavorate = /* GraphQL */ `
+  subscription OnDeleteJJPFavorate($owner: String!) {
+    onDeleteJJPFavorate(owner: $owner) {
+      id
+      productid
+      createdAt
+      updatedAt
+      product {
+        id
+        name
+        price
+        createdAt
+        updatedAt
+      }
+      owner
+    }
+  }
+`;
 export const onCreateJJPTest = /* GraphQL */ `
   subscription OnCreateJJPTest($owner: String!) {
     onCreateJJPTest(owner: $owner) {
