@@ -12,11 +12,12 @@ import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import { CartContext } from "../contexts/cart";
 import { FavoriteContext } from "../contexts/favorites";
+import FavoriteBorderOutlinedIcon from "@material-ui/icons/FavoriteBorderOutlined";
 
 export const ProductOverview = (props) => {
   const { id, name, price, url } = props.info;
   const { add } = React.useContext(CartContext);
-  const { favorite } = React.useContext(FavoriteContext);
+  const { favorite, favs } = React.useContext(FavoriteContext);
   return (
     <div>
       <Card>
@@ -40,7 +41,11 @@ export const ProductOverview = (props) => {
         </CardActionArea>
         <CardActions>
           <IconButton onClick={() => favorite(id)}>
-            <FavoriteIcon />
+            {favs.find((x) => x.productid === id) ? (
+              <FavoriteIcon />
+            ) : (
+              <FavoriteBorderOutlinedIcon />
+            )}
           </IconButton>
           <IconButton
             onClick={() => add(props.info)}
