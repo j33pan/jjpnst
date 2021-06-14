@@ -75,6 +75,7 @@ export const onCreateJJPOrderProduct = /* GraphQL */ `
         id
         name
         price
+        url
         createdAt
         updatedAt
       }
@@ -105,6 +106,7 @@ export const onUpdateJJPOrderProduct = /* GraphQL */ `
         id
         name
         price
+        url
         createdAt
         updatedAt
       }
@@ -135,6 +137,64 @@ export const onDeleteJJPOrderProduct = /* GraphQL */ `
         id
         name
         price
+        url
+        createdAt
+        updatedAt
+      }
+      owner
+    }
+  }
+`;
+export const onCreateJJPFavorate = /* GraphQL */ `
+  subscription OnCreateJJPFavorate($owner: String!) {
+    onCreateJJPFavorate(owner: $owner) {
+      id
+      productid
+      createdAt
+      updatedAt
+      product {
+        id
+        name
+        price
+        url
+        createdAt
+        updatedAt
+      }
+      owner
+    }
+  }
+`;
+export const onUpdateJJPFavorate = /* GraphQL */ `
+  subscription OnUpdateJJPFavorate($owner: String!) {
+    onUpdateJJPFavorate(owner: $owner) {
+      id
+      productid
+      createdAt
+      updatedAt
+      product {
+        id
+        name
+        price
+        url
+        createdAt
+        updatedAt
+      }
+      owner
+    }
+  }
+`;
+export const onDeleteJJPFavorate = /* GraphQL */ `
+  subscription OnDeleteJJPFavorate($owner: String!) {
+    onDeleteJJPFavorate(owner: $owner) {
+      id
+      productid
+      createdAt
+      updatedAt
+      product {
+        id
+        name
+        price
+        url
         createdAt
         updatedAt
       }
@@ -181,11 +241,15 @@ export const onCreateJJPProduct = /* GraphQL */ `
       id
       name
       price
+      url
       orders {
         nextToken
       }
       createdAt
       updatedAt
+      comments {
+        nextToken
+      }
     }
   }
 `;
@@ -195,11 +259,15 @@ export const onUpdateJJPProduct = /* GraphQL */ `
       id
       name
       price
+      url
       orders {
         nextToken
       }
       createdAt
       updatedAt
+      comments {
+        nextToken
+      }
     }
   }
 `;
@@ -209,9 +277,46 @@ export const onDeleteJJPProduct = /* GraphQL */ `
       id
       name
       price
+      url
       orders {
         nextToken
       }
+      createdAt
+      updatedAt
+      comments {
+        nextToken
+      }
+    }
+  }
+`;
+export const onCreateJJPComment = /* GraphQL */ `
+  subscription OnCreateJJPComment {
+    onCreateJJPComment {
+      id
+      productid
+      content
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateJJPComment = /* GraphQL */ `
+  subscription OnUpdateJJPComment {
+    onUpdateJJPComment {
+      id
+      productid
+      content
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteJJPComment = /* GraphQL */ `
+  subscription OnDeleteJJPComment {
+    onDeleteJJPComment {
+      id
+      productid
+      content
       createdAt
       updatedAt
     }

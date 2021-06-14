@@ -15,11 +15,15 @@ export const createJJPProduct = /* GraphQL */ `
       id
       name
       price
+      url
       orders {
         nextToken
       }
       createdAt
       updatedAt
+      comments {
+        nextToken
+      }
     }
   }
 `;
@@ -32,11 +36,15 @@ export const updateJJPProduct = /* GraphQL */ `
       id
       name
       price
+      url
       orders {
         nextToken
       }
       createdAt
       updatedAt
+      comments {
+        nextToken
+      }
     }
   }
 `;
@@ -49,11 +57,15 @@ export const deleteJJPProduct = /* GraphQL */ `
       id
       name
       price
+      url
       orders {
         nextToken
       }
       createdAt
       updatedAt
+      comments {
+        nextToken
+      }
     }
   }
 `;
@@ -143,6 +155,7 @@ export const createJJPOrderProduct = /* GraphQL */ `
         id
         name
         price
+        url
         createdAt
         updatedAt
       }
@@ -176,6 +189,7 @@ export const updateJJPOrderProduct = /* GraphQL */ `
         id
         name
         price
+        url
         createdAt
         updatedAt
       }
@@ -209,10 +223,119 @@ export const deleteJJPOrderProduct = /* GraphQL */ `
         id
         name
         price
+        url
         createdAt
         updatedAt
       }
       owner
+    }
+  }
+`;
+export const createJJPFavorate = /* GraphQL */ `
+  mutation CreateJJPFavorate(
+    $input: CreateJJPFavorateInput!
+    $condition: ModelJJPFavorateConditionInput
+  ) {
+    createJJPFavorate(input: $input, condition: $condition) {
+      id
+      productid
+      createdAt
+      updatedAt
+      product {
+        id
+        name
+        price
+        url
+        createdAt
+        updatedAt
+      }
+      owner
+    }
+  }
+`;
+export const updateJJPFavorate = /* GraphQL */ `
+  mutation UpdateJJPFavorate(
+    $input: UpdateJJPFavorateInput!
+    $condition: ModelJJPFavorateConditionInput
+  ) {
+    updateJJPFavorate(input: $input, condition: $condition) {
+      id
+      productid
+      createdAt
+      updatedAt
+      product {
+        id
+        name
+        price
+        url
+        createdAt
+        updatedAt
+      }
+      owner
+    }
+  }
+`;
+export const deleteJJPFavorate = /* GraphQL */ `
+  mutation DeleteJJPFavorate(
+    $input: DeleteJJPFavorateInput!
+    $condition: ModelJJPFavorateConditionInput
+  ) {
+    deleteJJPFavorate(input: $input, condition: $condition) {
+      id
+      productid
+      createdAt
+      updatedAt
+      product {
+        id
+        name
+        price
+        url
+        createdAt
+        updatedAt
+      }
+      owner
+    }
+  }
+`;
+export const createJJPComment = /* GraphQL */ `
+  mutation CreateJJPComment(
+    $input: CreateJJPCommentInput!
+    $condition: ModelJJPCommentConditionInput
+  ) {
+    createJJPComment(input: $input, condition: $condition) {
+      id
+      productid
+      content
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateJJPComment = /* GraphQL */ `
+  mutation UpdateJJPComment(
+    $input: UpdateJJPCommentInput!
+    $condition: ModelJJPCommentConditionInput
+  ) {
+    updateJJPComment(input: $input, condition: $condition) {
+      id
+      productid
+      content
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteJJPComment = /* GraphQL */ `
+  mutation DeleteJJPComment(
+    $input: DeleteJJPCommentInput!
+    $condition: ModelJJPCommentConditionInput
+  ) {
+    deleteJJPComment(input: $input, condition: $condition) {
+      id
+      productid
+      content
+      createdAt
+      updatedAt
     }
   }
 `;

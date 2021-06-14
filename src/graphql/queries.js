@@ -62,6 +62,7 @@ export const getJJPOrderProduct = /* GraphQL */ `
         id
         name
         price
+        url
         createdAt
         updatedAt
       }
@@ -85,6 +86,43 @@ export const listJJPOrderProducts = /* GraphQL */ `
         orderid
         productid
         amount
+        createdAt
+        updatedAt
+        owner
+      }
+      nextToken
+    }
+  }
+`;
+export const getJJPFavorate = /* GraphQL */ `
+  query GetJJPFavorate($id: ID!) {
+    getJJPFavorate(id: $id) {
+      id
+      productid
+      createdAt
+      updatedAt
+      product {
+        id
+        name
+        price
+        url
+        createdAt
+        updatedAt
+      }
+      owner
+    }
+  }
+`;
+export const listJJPFavorates = /* GraphQL */ `
+  query ListJJPFavorates(
+    $filter: ModelJJPFavorateFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listJJPFavorates(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        productid
         createdAt
         updatedAt
         owner
@@ -133,6 +171,7 @@ export const listJJPProducts = /* GraphQL */ `
         id
         name
         price
+        url
         createdAt
         updatedAt
       }
@@ -146,11 +185,44 @@ export const getJJPProduct = /* GraphQL */ `
       id
       name
       price
+      url
       orders {
         nextToken
       }
       createdAt
       updatedAt
+      comments {
+        nextToken
+      }
+    }
+  }
+`;
+export const getJJPComment = /* GraphQL */ `
+  query GetJJPComment($id: ID!) {
+    getJJPComment(id: $id) {
+      id
+      productid
+      content
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listJJPComments = /* GraphQL */ `
+  query ListJJPComments(
+    $filter: ModelJJPCommentFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listJJPComments(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        productid
+        content
+        createdAt
+        updatedAt
+      }
+      nextToken
     }
   }
 `;
