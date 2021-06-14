@@ -20,6 +20,9 @@ export const createJJPProduct = /* GraphQL */ `
       }
       createdAt
       updatedAt
+      comments {
+        nextToken
+      }
     }
   }
 `;
@@ -37,6 +40,9 @@ export const updateJJPProduct = /* GraphQL */ `
       }
       createdAt
       updatedAt
+      comments {
+        nextToken
+      }
     }
   }
 `;
@@ -54,6 +60,9 @@ export const deleteJJPProduct = /* GraphQL */ `
       }
       createdAt
       updatedAt
+      comments {
+        nextToken
+      }
     }
   }
 `;
@@ -276,6 +285,48 @@ export const deleteJJPFavorate = /* GraphQL */ `
         updatedAt
       }
       owner
+    }
+  }
+`;
+export const createJJPComment = /* GraphQL */ `
+  mutation CreateJJPComment(
+    $input: CreateJJPCommentInput!
+    $condition: ModelJJPCommentConditionInput
+  ) {
+    createJJPComment(input: $input, condition: $condition) {
+      id
+      productid
+      content
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateJJPComment = /* GraphQL */ `
+  mutation UpdateJJPComment(
+    $input: UpdateJJPCommentInput!
+    $condition: ModelJJPCommentConditionInput
+  ) {
+    updateJJPComment(input: $input, condition: $condition) {
+      id
+      productid
+      content
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteJJPComment = /* GraphQL */ `
+  mutation DeleteJJPComment(
+    $input: DeleteJJPCommentInput!
+    $condition: ModelJJPCommentConditionInput
+  ) {
+    deleteJJPComment(input: $input, condition: $condition) {
+      id
+      productid
+      content
+      createdAt
+      updatedAt
     }
   }
 `;

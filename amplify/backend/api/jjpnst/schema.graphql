@@ -11,6 +11,7 @@ type JJPProduct
   name: String
   price: Float
   orders: [JJPOrderProduct] @connection(keyName: "byproduct", fields: ["id"])
+  comments: [JJPComment] @connection(keyName: "byProduct", fields: ["id"])
 }
 
 type JJPOrder
@@ -40,6 +41,21 @@ type JJPOrderProduct
 type JJPFavorate @model @auth(rules: [{ allow: owner }]) {
   productid: ID!
   product: JJPProduct @connection(fields: ["productid"])
+}
+
+type JJPComment
+  @model
+  @key(name: "byProduct", fields: ["productid", "createdAt"])
+  @auth(
+    rules: [
+      { allow: public, provider: iam, operations: [read] }
+      { allow: private, operations: [read, create] }
+      { allow: groups, groups: ["Admin"] }
+    ]
+  ) {
+  productid: ID!
+  content: String
+  createdAt: AWSDateTime
 }
 
 type JJPTest @model @auth(rules: [{ allow: owner }]) {

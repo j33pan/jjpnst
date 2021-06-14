@@ -187,6 +187,38 @@ export const getJJPProduct = /* GraphQL */ `
       }
       createdAt
       updatedAt
+      comments {
+        nextToken
+      }
+    }
+  }
+`;
+export const getJJPComment = /* GraphQL */ `
+  query GetJJPComment($id: ID!) {
+    getJJPComment(id: $id) {
+      id
+      productid
+      content
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listJJPComments = /* GraphQL */ `
+  query ListJJPComments(
+    $filter: ModelJJPCommentFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listJJPComments(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        productid
+        content
+        createdAt
+        updatedAt
+      }
+      nextToken
     }
   }
 `;

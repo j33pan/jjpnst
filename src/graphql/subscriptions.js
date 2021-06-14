@@ -240,6 +240,9 @@ export const onCreateJJPProduct = /* GraphQL */ `
       }
       createdAt
       updatedAt
+      comments {
+        nextToken
+      }
     }
   }
 `;
@@ -254,6 +257,9 @@ export const onUpdateJJPProduct = /* GraphQL */ `
       }
       createdAt
       updatedAt
+      comments {
+        nextToken
+      }
     }
   }
 `;
@@ -266,6 +272,42 @@ export const onDeleteJJPProduct = /* GraphQL */ `
       orders {
         nextToken
       }
+      createdAt
+      updatedAt
+      comments {
+        nextToken
+      }
+    }
+  }
+`;
+export const onCreateJJPComment = /* GraphQL */ `
+  subscription OnCreateJJPComment {
+    onCreateJJPComment {
+      id
+      productid
+      content
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateJJPComment = /* GraphQL */ `
+  subscription OnUpdateJJPComment {
+    onUpdateJJPComment {
+      id
+      productid
+      content
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteJJPComment = /* GraphQL */ `
+  subscription OnDeleteJJPComment {
+    onDeleteJJPComment {
+      id
+      productid
+      content
       createdAt
       updatedAt
     }

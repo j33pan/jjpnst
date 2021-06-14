@@ -1,11 +1,35 @@
 import React from "react";
 import { API, graphqlOperation } from "aws-amplify";
-import { listJJPProducts } from "../graphql/queries";
+import { listJJPComments, listJJPProducts } from "../graphql/queries";
 import { CartContext } from "../contexts/cart";
 import { createJJPFavorate } from "../graphql/mutations";
 
 function Products() {
   const [prods, setprods] = React.useState([]);
+  const [comments, setComments] = React.useState([]);
+
+  const getJJPProduct = /* GraphQL */ `
+    query GetJJPProduct($id: ID!) {
+      getJJPProduct(id: $id) {
+        id
+        name
+        price
+        orders {
+          nextToken
+        }
+        createdAt
+        updatedAt
+        comments {
+          items {
+            id
+            productid
+            content
+          }
+        }
+      }
+    }
+  `;
+
   const getprods = async () => {
     try {
       const response = await API.graphql({
@@ -31,6 +55,19 @@ function Products() {
     }
   };
 
+  const getComments = async (id) => {
+    console.log(id);
+    try {
+      const response = await API.graphql(
+        graphqlOperation(getJJPProduct, { id: id })
+      );
+      console.log(response);
+      setComments(response.data.getJJPProduct.comments.items);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   React.useEffect(() => {
     getprods();
   }, []);
@@ -40,12 +77,22 @@ function Products() {
     <div>
       {prods.map((x) => (
         <div key={x.id}>
+          {x.id}
           <button onClick={() => createfav(x.id)}>Star</button>
+          <button onClick={() => getComments(x.id)}>Comments</button>
           {x.name}: ${x.price}
           <button onClick={() => remove(x.id)}>-</button>
           <button onClick={() => add(x)}>+</button>
         </div>
       ))}
+      <br />
+      {comments.length > 0 && (
+        <div>
+          {comments.map(({ id, productid, content }) => (
+            <div key={id}>{content}</div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
