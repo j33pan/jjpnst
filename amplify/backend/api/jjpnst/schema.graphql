@@ -38,7 +38,6 @@ type JJPOrderProduct
 }
 
 type JJPFavorate @model @auth(rules: [{ allow: owner }]) {
-  id: ID!
   productid: ID!
   product: JJPProduct @connection(fields: ["productid"])
 }

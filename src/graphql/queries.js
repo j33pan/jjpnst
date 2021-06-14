@@ -123,13 +123,6 @@ export const listJJPFavorates = /* GraphQL */ `
         productid
         createdAt
         updatedAt
-        product {
-          id
-          name
-          price
-          createdAt
-          updatedAt
-        }
         owner
       }
       nextToken

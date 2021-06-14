@@ -1,7 +1,31 @@
 import API, { graphqlOperation } from "@aws-amplify/api";
 import React from "react";
-import { createJJPFavorate } from "../graphql/mutations";
-import { listJJPFavorates } from "../graphql/queries";
+
+const listJJPFavorates = /* GraphQL */ `
+  query ListJJPFavorates(
+    $filter: ModelJJPFavorateFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listJJPFavorates(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        productid
+        createdAt
+        updatedAt
+        product {
+          id
+          name
+          price
+          createdAt
+          updatedAt
+        }
+        owner
+      }
+      nextToken
+    }
+  }
+`;
 
 export const Favorates = () => {
   const [favs, setFavs] = React.useState([]);
