@@ -24,7 +24,14 @@ export const ProductOverview = (props) => {
             image={pink}
             title="Contemplative Reptile"
           />
-          <CardContent>
+          <CardContent
+            style={{
+              textAlign: "center",
+              padding: 0,
+              paddingLeft: 5,
+              paddingRight: 5,
+            }}
+          >
             <Typography variant="h6">{name}</Typography>
             <Typography variant="subtitle1">${price}</Typography>
           </CardContent>
