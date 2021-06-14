@@ -24,7 +24,6 @@ function Orders() {
       const response = await API.graphql(
         graphqlOperation(getJJPOrder, { id: id })
       );
-      console.log(response.data);
       setorddetails(response.data.getJJPOrder.products.items);
     } catch (error) {
       console.error(error);

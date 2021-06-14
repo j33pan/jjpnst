@@ -44,7 +44,6 @@ const CartProvider = ({ children }) => {
       return (x += amount * price);
     }, 0);
     settotal(newtotal);
-    console.log(newtotal, cart);
   }, [cart]);
 
   const processorder = () => {
@@ -55,7 +54,6 @@ const CartProvider = ({ children }) => {
         return { id: x.id, amount: x.amount };
       }),
     };
-    console.log(input);
     process(input);
   };
 
@@ -66,7 +64,6 @@ const CartProvider = ({ children }) => {
         graphqlOperation(jjpprocessorder, { input: input })
       );
       const sessionId = response.data.jjpprocessorder;
-      console.log(sessionId);
       const res = await stripe.redirectToCheckout({ sessionId: sessionId });
       if (res.error) console.error(res.error);
     } catch (error) {

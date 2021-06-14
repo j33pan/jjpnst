@@ -38,7 +38,6 @@ function Products() {
         query: listJJPProducts,
         authMode: "AWS_IAM",
       });
-      // console.log(response);
       setprods(response.data.listJJPProducts.items);
     } catch (error) {
       console.error(error);

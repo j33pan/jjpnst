@@ -14,15 +14,13 @@ function CreatProduct() {
       const response = await API.graphql(
         graphqlOperation(createJJPProduct, { input: input })
       );
-      console.log(response);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 
   const handlesubmit = (e) => {
     e.preventDefault();
-    console.log(input);
     creatprods();
   };
   return (

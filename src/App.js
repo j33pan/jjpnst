@@ -21,9 +21,8 @@ function App() {
       const response = await API.graphql(
         graphqlOperation(createJJPOrder, { input: input })
       );
-      console.log(response);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 
