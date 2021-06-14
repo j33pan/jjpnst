@@ -62,6 +62,7 @@ export const getJJPOrderProduct = /* GraphQL */ `
         id
         name
         price
+        url
         createdAt
         updatedAt
       }
@@ -104,6 +105,7 @@ export const getJJPFavorate = /* GraphQL */ `
         id
         name
         price
+        url
         createdAt
         updatedAt
       }
@@ -169,6 +171,7 @@ export const listJJPProducts = /* GraphQL */ `
         id
         name
         price
+        url
         createdAt
         updatedAt
       }
@@ -182,6 +185,7 @@ export const getJJPProduct = /* GraphQL */ `
       id
       name
       price
+      url
       orders {
         nextToken
       }

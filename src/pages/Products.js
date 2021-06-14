@@ -3,6 +3,8 @@ import { API, graphqlOperation } from "aws-amplify";
 import { listJJPComments, listJJPProducts } from "../graphql/queries";
 import { CartContext } from "../contexts/cart";
 import { createJJPFavorate } from "../graphql/mutations";
+import { ProductOverview } from "../components/ProductOverview";
+import { Grid } from "@material-ui/core";
 
 function Products() {
   const [prods, setprods] = React.useState([]);
@@ -36,7 +38,6 @@ function Products() {
         query: listJJPProducts,
         authMode: "AWS_IAM",
       });
-      // console.log(response);
       setprods(response.data.listJJPProducts.items);
     } catch (error) {
       console.error(error);
@@ -49,19 +50,16 @@ function Products() {
       const response = await API.graphql(
         graphqlOperation(createJJPFavorate, { input: input })
       );
-      console.log(response);
     } catch (error) {
       console.error(error);
     }
   };
 
   const getComments = async (id) => {
-    console.log(id);
     try {
       const response = await API.graphql(
         graphqlOperation(getJJPProduct, { id: id })
       );
-      console.log(response);
       setComments(response.data.getJJPProduct.comments.items);
     } catch (error) {
       console.error(error);
@@ -75,7 +73,7 @@ function Products() {
   const { add, remove } = React.useContext(CartContext);
   return (
     <div>
-      {prods.map((x) => (
+      {/* {prods.map((x) => (
         <div key={x.id}>
           <button onClick={() => createfav(x.id)}>Star</button>
           <button onClick={() => getComments(x.id)}>Comments</button>
@@ -91,7 +89,15 @@ function Products() {
             <div key={id}>{content}</div>
           ))}
         </div>
-      )}
+      )} */}
+
+      <Grid container spacing={3}>
+        {prods.map((x) => (
+          <Grid item key={x.id} xs={3}>
+            <ProductOverview info={x} />
+          </Grid>
+        ))}
+      </Grid>
     </div>
   );
 }

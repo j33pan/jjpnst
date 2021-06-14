@@ -15,6 +15,7 @@ export const createJJPProduct = /* GraphQL */ `
       id
       name
       price
+      url
       orders {
         nextToken
       }
@@ -35,6 +36,7 @@ export const updateJJPProduct = /* GraphQL */ `
       id
       name
       price
+      url
       orders {
         nextToken
       }
@@ -55,6 +57,7 @@ export const deleteJJPProduct = /* GraphQL */ `
       id
       name
       price
+      url
       orders {
         nextToken
       }
@@ -152,6 +155,7 @@ export const createJJPOrderProduct = /* GraphQL */ `
         id
         name
         price
+        url
         createdAt
         updatedAt
       }
@@ -185,6 +189,7 @@ export const updateJJPOrderProduct = /* GraphQL */ `
         id
         name
         price
+        url
         createdAt
         updatedAt
       }
@@ -218,6 +223,7 @@ export const deleteJJPOrderProduct = /* GraphQL */ `
         id
         name
         price
+        url
         createdAt
         updatedAt
       }
@@ -239,6 +245,7 @@ export const createJJPFavorate = /* GraphQL */ `
         id
         name
         price
+        url
         createdAt
         updatedAt
       }
@@ -260,6 +267,7 @@ export const updateJJPFavorate = /* GraphQL */ `
         id
         name
         price
+        url
         createdAt
         updatedAt
       }
@@ -281,6 +289,7 @@ export const deleteJJPFavorate = /* GraphQL */ `
         id
         name
         price
+        url
         createdAt
         updatedAt
       }
