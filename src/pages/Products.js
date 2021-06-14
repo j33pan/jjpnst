@@ -3,6 +3,7 @@ import { API, graphqlOperation } from "aws-amplify";
 import { listJJPComments, listJJPProducts } from "../graphql/queries";
 import { CartContext } from "../contexts/cart";
 import { createJJPFavorate } from "../graphql/mutations";
+import { ProductOverview } from "../components/ProductOverview";
 
 function Products() {
   const [prods, setprods] = React.useState([]);
@@ -75,7 +76,7 @@ function Products() {
   const { add, remove } = React.useContext(CartContext);
   return (
     <div>
-      {prods.map((x) => (
+      {/* {prods.map((x) => (
         <div key={x.id}>
           <button onClick={() => createfav(x.id)}>Star</button>
           <button onClick={() => getComments(x.id)}>Comments</button>
@@ -91,7 +92,11 @@ function Products() {
             <div key={id}>{content}</div>
           ))}
         </div>
-      )}
+      )} */}
+
+      {prods.map((x) => (
+        <ProductOverview key={x.id} info={x} />
+      ))}
     </div>
   );
 }
