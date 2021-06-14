@@ -4,6 +4,7 @@ import { listJJPComments, listJJPProducts } from "../graphql/queries";
 import { CartContext } from "../contexts/cart";
 import { createJJPFavorate } from "../graphql/mutations";
 import { ProductOverview } from "../components/ProductOverview";
+import { Grid } from "@material-ui/core";
 
 function Products() {
   const [prods, setprods] = React.useState([]);
@@ -94,9 +95,13 @@ function Products() {
         </div>
       )} */}
 
-      {prods.map((x) => (
-        <ProductOverview key={x.id} info={x} />
-      ))}
+      <Grid container spacing={3}>
+        {prods.map((x) => (
+          <Grid item key={x.id} xs={3}>
+            <ProductOverview info={x} />
+          </Grid>
+        ))}
+      </Grid>
     </div>
   );
 }
