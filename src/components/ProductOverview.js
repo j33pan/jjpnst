@@ -8,14 +8,13 @@ import {
   IconButton,
   Typography,
 } from "@material-ui/core";
-import pink from "../images/pink.jpg";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import { CartContext } from "../contexts/cart";
 import { FavoriteContext } from "../contexts/favorites";
 
 export const ProductOverview = (props) => {
-  const { id, name, price } = props.info;
+  const { id, name, price, url } = props.info;
   const { add } = React.useContext(CartContext);
   const { favorite } = React.useContext(FavoriteContext);
   return (
@@ -24,8 +23,8 @@ export const ProductOverview = (props) => {
         <CardActionArea>
           <CardMedia
             style={{ height: 250 }}
-            image={pink}
-            title="Contemplative Reptile"
+            image={process.env.PUBLIC_URL + "/" + url + ".jpg"}
+            title="img"
           />
           <CardContent
             style={{

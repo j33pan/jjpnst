@@ -10,6 +10,7 @@ type JJPProduct
   id: ID!
   name: String
   price: Float
+  url: String
   orders: [JJPOrderProduct] @connection(keyName: "byproduct", fields: ["id"])
   comments: [JJPComment] @connection(keyName: "byProduct", fields: ["id"])
 }

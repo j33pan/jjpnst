@@ -7,6 +7,7 @@ function CreatProduct() {
   const [input, setinput] = React.useState({
     name: "",
     price: 0,
+    url: "",
   });
 
   const creatprods = async () => {
@@ -30,6 +31,11 @@ function CreatProduct() {
           type="text"
           placeholder="Product name"
           onChange={(e) => setinput({ ...input, name: e.target.value })}
+        />
+        <input
+          type="text"
+          placeholder="URL"
+          onChange={(e) => setinput({ ...input, url: e.target.value })}
         />
         <input
           type="number"
