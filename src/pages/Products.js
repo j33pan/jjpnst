@@ -77,7 +77,6 @@ function Products() {
     <div>
       {prods.map((x) => (
         <div key={x.id}>
-          {x.id}
           <button onClick={() => createfav(x.id)}>Star</button>
           <button onClick={() => getComments(x.id)}>Comments</button>
           {x.name}: ${x.price}

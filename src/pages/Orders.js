@@ -65,6 +65,7 @@ function Orders() {
         <div>
           {orddetails.map((x, index) => (
             <div key={index}>
+              <input />
               <button onClick={() => comment(x.product.id)}>Comment</button>
               {x.product.name}: ${x.product.price} x{x.amount}
             </div>
