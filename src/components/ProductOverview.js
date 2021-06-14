@@ -11,10 +11,13 @@ import {
 import pink from "../images/pink.jpg";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import FavoriteIcon from "@material-ui/icons/Favorite";
+import { CartContext } from "../contexts/cart";
+import { FavoriteContext } from "../contexts/favorites";
 
 export const ProductOverview = (props) => {
   const { id, name, price } = props.info;
-
+  const { add } = React.useContext(CartContext);
+  const { favorite } = React.useContext(FavoriteContext);
   return (
     <div>
       <Card>
@@ -37,10 +40,13 @@ export const ProductOverview = (props) => {
           </CardContent>
         </CardActionArea>
         <CardActions>
-          <IconButton>
+          <IconButton onClick={() => favorite(id)}>
             <FavoriteIcon />
           </IconButton>
-          <IconButton style={{ marginLeft: "auto" }}>
+          <IconButton
+            onClick={() => add(props.info)}
+            style={{ marginLeft: "auto" }}
+          >
             <ShoppingCartIcon />
           </IconButton>
         </CardActions>

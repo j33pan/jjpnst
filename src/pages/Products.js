@@ -51,19 +51,16 @@ function Products() {
       const response = await API.graphql(
         graphqlOperation(createJJPFavorate, { input: input })
       );
-      console.log(response);
     } catch (error) {
       console.error(error);
     }
   };
 
   const getComments = async (id) => {
-    console.log(id);
     try {
       const response = await API.graphql(
         graphqlOperation(getJJPProduct, { id: id })
       );
-      console.log(response);
       setComments(response.data.getJJPProduct.comments.items);
     } catch (error) {
       console.error(error);

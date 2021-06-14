@@ -34,7 +34,6 @@ export const Favorates = () => {
     try {
       const response = await API.graphql({ query: listJJPFavorates });
       setFavs(response.data.listJJPFavorates.items);
-      console.log(response.data.listJJPFavorates.items);
     } catch (error) {
       console.error(error);
     }
