@@ -13,22 +13,18 @@ import Checkout from "./pages/Checkout";
 import PaymentSuccess from "./pages/PaymentSuccess";
 import { Favorates } from "./pages/Favorates";
 import { NavBar } from "./components/NavBar";
+import { createMuiTheme, MuiThemeProvider } from "@material-ui/core";
 Amplify.configure(awsconfig);
 
-function App() {
-  const createorders = async () => {
-    try {
-      const input = { code: "ord00000000002admin" };
-      const response = await API.graphql(
-        graphqlOperation(createJJPOrder, { input: input })
-      );
-    } catch (error) {
-      console.error(error);
-    }
-  };
+const theme = createMuiTheme({
+  typography: {
+    fontFamily: ["Kanit"].join(","),
+  },
+});
 
+function App() {
   return (
-    <div>
+    <MuiThemeProvider theme={theme}>
       <Router>
         <NavBar />
         <br />
@@ -44,7 +40,7 @@ function App() {
           <Route component={Favorates} path="/favorates" exact />
         </Switch>
       </Router>
-    </div>
+    </MuiThemeProvider>
   );
 }
 
