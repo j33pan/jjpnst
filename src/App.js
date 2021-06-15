@@ -13,7 +13,7 @@ import Checkout from "./pages/Checkout";
 import PaymentSuccess from "./pages/PaymentSuccess";
 import { Favorates } from "./pages/Favorates";
 import { NavBar } from "./components/NavBar";
-import { createMuiTheme, MuiThemeProvider } from "@material-ui/core";
+import { Container, createMuiTheme, MuiThemeProvider } from "@material-ui/core";
 Amplify.configure(awsconfig);
 
 const theme = createMuiTheme({
@@ -28,17 +28,19 @@ function App() {
       <Router>
         <NavBar />
         <br />
-        <Switch>
-          <Route component={Home} path="/" exact />
-          <Route component={Signin} path="/signin" exact />
-          <Route component={Products} path="/products" exact />
-          <Route component={Orders} path="/orders" exact />
-          <Route component={CreatProduct} path="/createprod" exact />
-          <Route component={ShoppingCart} path="/cart" exact />
-          <Route component={Checkout} path="/checkout" exact />
-          <Route component={PaymentSuccess} path="/paymentsuccess" exact />
-          <Route component={Favorates} path="/favorates" exact />
-        </Switch>
+        <Container>
+          <Switch>
+            <Route component={Home} path="/" exact />
+            <Route component={Signin} path="/signin" exact />
+            <Route component={Products} path="/products" exact />
+            <Route component={Orders} path="/orders" exact />
+            <Route component={CreatProduct} path="/createprod" exact />
+            <Route component={ShoppingCart} path="/cart" exact />
+            <Route component={Checkout} path="/checkout" exact />
+            <Route component={PaymentSuccess} path="/paymentsuccess" exact />
+            <Route component={Favorates} path="/favorates" exact />
+          </Switch>
+        </Container>
       </Router>
     </MuiThemeProvider>
   );
