@@ -1,56 +1,21 @@
 import API, { graphqlOperation } from "@aws-amplify/api";
+import { Grid } from "@material-ui/core";
 import React from "react";
-
-const listJJPFavorates = /* GraphQL */ `
-  query ListJJPFavorates(
-    $filter: ModelJJPFavorateFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listJJPFavorates(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        productid
-        createdAt
-        updatedAt
-        product {
-          id
-          name
-          price
-          createdAt
-          updatedAt
-        }
-        owner
-      }
-      nextToken
-    }
-  }
-`;
+import { FavoriteOverview } from "../components/FavoriteOverview";
+import { FavoriteContext } from "../contexts/favorites";
 
 export const Favorates = () => {
-  const [favs, setFavs] = React.useState([]);
-
-  const getfavs = async () => {
-    try {
-      const response = await API.graphql({ query: listJJPFavorates });
-      setFavs(response.data.listJJPFavorates.items);
-      console.log(response);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  React.useEffect(() => {
-    getfavs();
-  }, []);
+  const { favs } = React.useContext(FavoriteContext);
 
   return (
     <div>
-      {favs.map(({ id, product: { name, price } }) => (
-        <div key={id}>
-          {name}: ${price}
-        </div>
-      ))}
+      <Grid container spacing={3}>
+        {favs.map((x) => (
+          <Grid item key={x.id} xs={3}>
+            <FavoriteOverview info={x} />
+          </Grid>
+        ))}
+      </Grid>
     </div>
   );
 };
