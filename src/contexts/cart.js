@@ -18,12 +18,18 @@ const CartProvider = ({ children }) => {
     const { id, name, price } = product;
     const item = cart.find((x) => x.id === id);
     let newcart = [];
+    let newAmount = 1;
+
     if (!item) newcart = [...cart, { id, name, price, amount: 1 }];
-    else
+    else {
+      newAmount = item.amount + 1;
       newcart = [...cart].map((x) => {
-        return x.id !== id ? x : { ...x, amount: x.amount + 1 };
+        return x.id !== id ? x : { ...x, amount: newAmount };
       });
+    }
+
     setcart(newcart);
+    return newAmount;
   };
 
   const remove = (id) => {
@@ -37,6 +43,12 @@ const CartProvider = ({ children }) => {
         });
       setcart(newcart);
     }
+  };
+
+  const getItemInCart = (id) => {
+    const item = cart.find((x) => x.id === id);
+    if (!item) return 0;
+    return item.amount;
   };
 
   React.useEffect(() => {
@@ -73,7 +85,7 @@ const CartProvider = ({ children }) => {
 
   return (
     <CartContext.Provider
-      value={{ cart, add, remove, total, setaddr, processorder }}
+      value={{ cart, add, remove, getItemInCart, total, setaddr, processorder }}
     >
       {children}
     </CartContext.Provider>

@@ -1,6 +1,8 @@
 import React from "react";
 import Card from "@material-ui/core/Card";
 import {
+  Badge,
+  Button,
   CardActionArea,
   CardActions,
   CardContent,
@@ -16,8 +18,27 @@ import FavoriteBorderOutlinedIcon from "@material-ui/icons/FavoriteBorderOutline
 
 export const ProductOverview = (props) => {
   const { id, name, price, url } = props.info;
-  const { add } = React.useContext(CartContext);
-  const { favorite, favs } = React.useContext(FavoriteContext);
+  const { add, getItemInCart } = React.useContext(CartContext);
+  const { favorite, unFavorite, favs } = React.useContext(FavoriteContext);
+  const [amountInCart, setAmountincart] = React.useState(0);
+
+  const add2Cart = () => {
+    const amount = add(props.info);
+    setAmountincart(amount);
+  };
+
+  React.useEffect(() => {
+    const amount = getItemInCart(id);
+    setAmountincart(amount);
+  }, []);
+
+  const handleFavorite = () => {
+    const item = favs.find((x) => x.productid == id);
+
+    if (!item) favorite(id);
+    else unFavorite(id);
+  };
+
   return (
     <div>
       <Card>
@@ -40,18 +61,17 @@ export const ProductOverview = (props) => {
           </CardContent>
         </CardActionArea>
         <CardActions>
-          <IconButton onClick={() => favorite(id)}>
+          <IconButton onClick={handleFavorite}>
             {favs.find((x) => x.productid === id) ? (
               <FavoriteIcon />
             ) : (
               <FavoriteBorderOutlinedIcon />
             )}
           </IconButton>
-          <IconButton
-            onClick={() => add(props.info)}
-            style={{ marginLeft: "auto" }}
-          >
-            <ShoppingCartIcon />
+          <IconButton onClick={add2Cart} style={{ marginLeft: "auto" }}>
+            <Badge badgeContent={amountInCart} color="primary">
+              <ShoppingCartIcon />
+            </Badge>
           </IconButton>
         </CardActions>
       </Card>
