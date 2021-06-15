@@ -5,13 +5,16 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { CartProvider } from "./contexts/cart";
 import { FavoriteProvider } from "./contexts/favorites";
+import { AuthProvider } from "./contexts/auth";
 
 ReactDOM.render(
   <CartProvider>
     <FavoriteProvider>
-      <React.StrictMode>
-        <App />
-      </React.StrictMode>
+      <AuthProvider>
+        <React.StrictMode>
+          <App />
+        </React.StrictMode>
+      </AuthProvider>
     </FavoriteProvider>
   </CartProvider>,
   document.getElementById("root")
