@@ -43,28 +43,37 @@ export const NavBar = () => {
             anchorEl={anchorEl}
             onClose={() => setAnchorEl(null)}
           >
-            <MenuItem onClick={() => navigate("/cart")}>
+            <MenuItem
+              onClick={() => navigate("/cart")}
+              style={{ paddingLeft: 0, paddingRight: 20 }}
+            >
               <IconButton>
                 <ShoppingCartIcon />
               </IconButton>
               Cart
             </MenuItem>
             <Divider />
-            <MenuItem onClick={() => navigate("/favorates")}>
+            <MenuItem
+              onClick={() => navigate("/favorates")}
+              style={{ paddingLeft: 0, paddingRight: 20 }}
+            >
               <IconButton>
                 <FavoriteIcon />
               </IconButton>
               Favorites
             </MenuItem>
             <Divider />
-            <MenuItem onClick={() => navigate("/orders")}>
+            <MenuItem
+              onClick={() => navigate("/orders")}
+              style={{ paddingLeft: 0, paddingRight: 20 }}
+            >
               <IconButton>
                 <DescriptionIcon />
               </IconButton>
               Orders
             </MenuItem>
             <Divider />
-            <MenuItem>
+            <MenuItem style={{ paddingLeft: 0, paddingRight: 20 }}>
               <IconButton>
                 <ExitToAppIcon />
               </IconButton>
