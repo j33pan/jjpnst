@@ -16,16 +16,15 @@ const CartProvider = ({ children }) => {
   const [addr, setaddr] = React.useState("");
 
   const add = (product) => {
-    const { id, name, price } = product;
-    const item = cart.find((x) => x.id === id);
+    const item = cart.find((x) => x.id === product.id);
     let newcart = [];
     let newAmount = 1;
 
-    if (!item) newcart = [...cart, { id, name, price, amount: 1 }];
+    if (!item) newcart = [...cart, { ...product, amount: 1 }];
     else {
       newAmount = item.amount + 1;
       newcart = [...cart].map((x) => {
-        return x.id !== id ? x : { ...x, amount: newAmount };
+        return x.id !== product.id ? x : { ...x, amount: newAmount };
       });
     }
 
