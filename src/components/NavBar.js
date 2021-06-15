@@ -36,6 +36,7 @@ export const NavBar = () => {
         </Typography>
         <div style={{ marginLeft: "auto" }}>
           <Button onClick={() => history.push("/products")}>Products</Button>
+          <Button onClick={() => history.push("/favorates")}>Favorites</Button>
           <Button onClick={() => history.push("/cart")}>Cart</Button>
 
           {!currUser ? (
@@ -51,16 +52,6 @@ export const NavBar = () => {
                 anchorEl={anchorEl}
                 onClose={() => setAnchorEl(null)}
               >
-                <MenuItem
-                  onClick={() => navigate("/favorates")}
-                  style={{ paddingLeft: 0, paddingRight: 20 }}
-                >
-                  <IconButton>
-                    <FavoriteIcon />
-                  </IconButton>
-                  Favorites
-                </MenuItem>
-                <Divider />
                 <MenuItem
                   onClick={() => navigate("/orders")}
                   style={{ paddingLeft: 0, paddingRight: 20 }}
