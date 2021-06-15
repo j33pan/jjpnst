@@ -34,6 +34,9 @@ export const NavBar = () => {
         </Typography>
         <div style={{ marginLeft: "auto" }}>
           <Button onClick={() => history.push("/products")}>Products</Button>
+          <IconButton onClick={() => navigate("/cart")}>
+            <ShoppingCartIcon />
+          </IconButton>
           <Button onClick={() => history.push("/signin")}>Sign in</Button>
           <IconButton onClick={(e) => setAnchorEl(e.currentTarget)}>
             <AccountCircleRoundedIcon />
@@ -43,16 +46,6 @@ export const NavBar = () => {
             anchorEl={anchorEl}
             onClose={() => setAnchorEl(null)}
           >
-            <MenuItem
-              onClick={() => navigate("/cart")}
-              style={{ paddingLeft: 0, paddingRight: 20 }}
-            >
-              <IconButton>
-                <ShoppingCartIcon />
-              </IconButton>
-              Cart
-            </MenuItem>
-            <Divider />
             <MenuItem
               onClick={() => navigate("/favorates")}
               style={{ paddingLeft: 0, paddingRight: 20 }}
