@@ -12,45 +12,37 @@ import ShoppingCart from "./pages/ShoppingCart";
 import Checkout from "./pages/Checkout";
 import PaymentSuccess from "./pages/PaymentSuccess";
 import { Favorates } from "./pages/Favorates";
+import { NavBar } from "./components/NavBar";
+import { Container, createMuiTheme, MuiThemeProvider } from "@material-ui/core";
 Amplify.configure(awsconfig);
 
-function App() {
-  const createorders = async () => {
-    try {
-      const input = { code: "ord00000000002admin" };
-      const response = await API.graphql(
-        graphqlOperation(createJJPOrder, { input: input })
-      );
-    } catch (error) {
-      console.error(error);
-    }
-  };
+const theme = createMuiTheme({
+  typography: {
+    fontFamily: ["Kanit"].join(","),
+  },
+});
 
+function App() {
   return (
-    <div style={{ padding: 20 }}>
+    <MuiThemeProvider theme={theme}>
       <Router>
-        <div style={{ marginBottom: 10 }}>
-          <Link to="/">Home </Link>
-          <Link to="/createprod">Create Product </Link>
-          <Link to="/products">Products </Link>
-          <Link to="/cart">Cart</Link>
-          <Link to="/orders">Orders </Link>
-          <Link to="/signin">Sign in</Link>
-          <Link to="/favorates">Favorates</Link>
-        </div>
-        <Switch>
-          <Route component={Home} path="/" exact />
-          <Route component={Signin} path="/signin" exact />
-          <Route component={Products} path="/products" exact />
-          <Route component={Orders} path="/orders" exact />
-          <Route component={CreatProduct} path="/createprod" exact />
-          <Route component={ShoppingCart} path="/cart" exact />
-          <Route component={Checkout} path="/checkout" exact />
-          <Route component={PaymentSuccess} path="/paymentsuccess" exact />
-          <Route component={Favorates} path="/favorates" exact />
-        </Switch>
+        <NavBar />
+        <br />
+        <Container>
+          <Switch>
+            <Route component={Home} path="/" exact />
+            <Route component={Signin} path="/signin" exact />
+            <Route component={Products} path="/products" exact />
+            <Route component={Orders} path="/orders" exact />
+            <Route component={CreatProduct} path="/createprod" exact />
+            <Route component={ShoppingCart} path="/cart" exact />
+            <Route component={Checkout} path="/checkout" exact />
+            <Route component={PaymentSuccess} path="/paymentsuccess" exact />
+            <Route component={Favorates} path="/favorates" exact />
+          </Switch>
+        </Container>
       </Router>
-    </div>
+    </MuiThemeProvider>
   );
 }
 

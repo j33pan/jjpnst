@@ -23,9 +23,9 @@ export const ProductOverview = (props) => {
       <Card>
         <CardActionArea>
           <CardMedia
-            style={{ height: 250 }}
-            image={process.env.PUBLIC_URL + "/" + url + ".jpg"}
-            title="img"
+            style={{ height: 200, background: "lightgrey" }}
+            image={url}
+            title={name}
           />
           <CardContent
             style={{
