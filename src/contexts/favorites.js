@@ -1,6 +1,6 @@
 import API, { graphqlOperation } from "@aws-amplify/api";
 import React from "react";
-import { createJJPFavorate } from "../graphql/mutations";
+import { createJJPFavorate, deleteJJPFavorate } from "../graphql/mutations";
 import { listJJPFavorates } from "../graphql/queries";
 
 const FavoriteContext = React.createContext();
@@ -22,6 +22,21 @@ const FavoriteProvider = ({ children }) => {
     }
   };
 
+  const unFavorite = async (productId) => {
+    const item = favs.find((x) => x.productid == productId);
+    const input = { id: item.id };
+
+    try {
+      const response = await API.graphql(
+        graphqlOperation(deleteJJPFavorate, { input: input })
+      );
+      const newFavs = favs.filter((x) => x.id !== item.id);
+      setFavs(newFavs);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const getfavs = async () => {
     try {
       const response = await API.graphql({ query: listJJPFavorates });
@@ -36,7 +51,7 @@ const FavoriteProvider = ({ children }) => {
   }, []);
 
   return (
-    <FavoriteContext.Provider value={{ favorite, favs }}>
+    <FavoriteContext.Provider value={{ favorite, unFavorite, favs }}>
       {children}
     </FavoriteContext.Provider>
   );
