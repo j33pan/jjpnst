@@ -6,48 +6,28 @@ import { listJJPFavorates } from "../graphql/queries";
 const FavoriteContext = React.createContext();
 
 const FavoriteProvider = ({ children }) => {
+  const key = "JJPNST_FAVORITE";
   const [favs, setFavs] = React.useState([]);
 
-  const favorite = async (productId) => {
-    if (favs.find((x) => x.productid == productId)) return;
+  const favorite = (product) => {
+    if (favs.find((x) => x.id === product.id)) return;
 
-    const input = { productid: productId };
-    try {
-      const response = await API.graphql(
-        graphqlOperation(createJJPFavorate, { input: input })
-      );
-      setFavs([...favs, response.data.createJJPFavorate]);
-    } catch (error) {
-      console.error(error);
-    }
+    const data = [...favs, product];
+    setFavs(data);
+    localStorage.setItem(key, JSON.stringify(data));
   };
 
-  const unFavorite = async (productId) => {
-    const item = favs.find((x) => x.productid == productId);
-    const input = { id: item.id };
+  const unFavorite = (id) => {
+    if (!favs.find((x) => x.id === id)) return;
 
-    try {
-      const response = await API.graphql(
-        graphqlOperation(deleteJJPFavorate, { input: input })
-      );
-      const newFavs = favs.filter((x) => x.id !== item.id);
-      setFavs(newFavs);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const getfavs = async () => {
-    try {
-      const response = await API.graphql({ query: listJJPFavorates });
-      setFavs(response.data.listJJPFavorates.items);
-    } catch (error) {
-      console.error(error);
-    }
+    const data = favs.filter((x) => x.id !== id);
+    setFavs(data);
+    localStorage.setItem(key, JSON.stringify(data));
   };
 
   React.useEffect(() => {
-    getfavs();
+    const data = JSON.parse(localStorage.getItem(key));
+    if (data) setFavs(data);
   }, []);
 
   return (

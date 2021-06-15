@@ -33,10 +33,9 @@ export const ProductOverview = (props) => {
   }, []);
 
   const handleFavorite = () => {
-    const item = favs.find((x) => x.productid == id);
-
-    if (!item) favorite(id);
-    else unFavorite(id);
+    const item = favs.find((x) => x.id === id);
+    if (item) unFavorite(id);
+    else favorite(props.info);
   };
 
   return (
@@ -62,7 +61,7 @@ export const ProductOverview = (props) => {
         </CardActionArea>
         <CardActions>
           <IconButton onClick={handleFavorite}>
-            {favs.find((x) => x.productid === id) ? (
+            {favs.find((x) => x.id === id) ? (
               <FavoriteIcon />
             ) : (
               <FavoriteBorderOutlinedIcon />
