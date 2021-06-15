@@ -10,6 +10,7 @@ const stripePromise = loadStripe(
 const CartContext = React.createContext();
 
 const CartProvider = ({ children }) => {
+  const key = "JJPNST_SHOPPING_CART";
   const [cart, setcart] = React.useState([]);
   const [total, settotal] = React.useState(0);
   const [addr, setaddr] = React.useState("");
@@ -29,6 +30,7 @@ const CartProvider = ({ children }) => {
     }
 
     setcart(newcart);
+    localStorage.setItem(key, JSON.stringify(newcart));
     return newAmount;
   };
 
@@ -42,6 +44,7 @@ const CartProvider = ({ children }) => {
           return x.id !== id ? x : { ...x, amount: x.amount - 1 };
         });
       setcart(newcart);
+      localStorage.setItem(key, JSON.stringify(newcart));
     }
   };
 
@@ -57,6 +60,11 @@ const CartProvider = ({ children }) => {
     }, 0);
     settotal(newtotal);
   }, [cart]);
+
+  React.useEffect(() => {
+    const data = JSON.parse(localStorage.getItem(key));
+    if (data) setcart(data);
+  }, []);
 
   const processorder = () => {
     const input = {
