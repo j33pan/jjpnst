@@ -1,27 +1,21 @@
 import React from "react";
 import Card from "@material-ui/core/Card";
-import {
-  Badge,
-  CardActionArea,
-  CardActions,
-  CardContent,
-  CardMedia,
-  IconButton,
-  Typography,
-} from "@material-ui/core";
+import { Badge, CardActions, IconButton } from "@material-ui/core";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import { CartContext } from "../contexts/cart";
 import { FavoriteContext } from "../contexts/favorites";
 import DeleteIcon from "@material-ui/icons/Delete";
+import { StaticCardMedia } from "../subComponents/StaticCardMedia";
 
 export const FavoriteOverview = (props) => {
-  const { id, name, price, url } = props.info;
+  const { data } = props;
+  const { id, name, price, url } = data;
   const { add, getItemInCart } = React.useContext(CartContext);
-  const { favorite, unFavorite, favs } = React.useContext(FavoriteContext);
+  const { unFavorite } = React.useContext(FavoriteContext);
   const [amountInCart, setAmountincart] = React.useState(0);
 
   const add2Cart = () => {
-    const amount = add(props.info);
+    const amount = add(data);
     setAmountincart(amount);
   };
 
@@ -30,33 +24,10 @@ export const FavoriteOverview = (props) => {
     setAmountincart(amount);
   }, []);
 
-  const handleFavorite = () => {
-    const item = favs.find((x) => x.id === id);
-    if (item) unFavorite(id);
-    else favorite(props.info);
-  };
-
   return (
     <div>
       <Card>
-        <CardActionArea>
-          <CardMedia
-            style={{ height: 200, background: "lightgrey" }}
-            image={url}
-            title={name}
-          />
-          <CardContent
-            style={{
-              textAlign: "center",
-              padding: 0,
-              paddingLeft: 5,
-              paddingRight: 5,
-            }}
-          >
-            <Typography variant="h6">{name}</Typography>
-            <Typography variant="subtitle1">${price}</Typography>
-          </CardContent>
-        </CardActionArea>
+        <StaticCardMedia data={data} />
         <CardActions>
           <IconButton onClick={add2Cart}>
             <Badge badgeContent={amountInCart} color="primary">
